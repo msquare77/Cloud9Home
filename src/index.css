@@ -1,0 +1,474 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-primary: #0E1035;
+    --color-accent: #14ABFA;
+    --color-bg-base: #F1F6FD;
+  }
+
+  body {
+    font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background-color: #F1F6FD;
+    color: #0E1035;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.65;
+    letter-spacing: -0.006em;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+    color: #0E1035;
+    text-wrap: balance;
+  }
+
+  h1, h2 {
+    letter-spacing: -0.04em;
+    font-weight: 800;
+  }
+
+  h3, h4 {
+    letter-spacing: -0.025em;
+    line-height: 1.25;
+    font-weight: 700;
+  }
+
+  h5, h6 {
+    font-weight: 600;
+  }
+
+  p {
+    text-wrap: pretty;
+    font-weight: 400;
+  }
+
+  button, input, select, textarea {
+    font: inherit;
+  }
+
+  button, input, select, [role="button"] {
+    border-radius: 9999px;
+  }
+
+  textarea {
+    border-radius: 1.5rem;
+  }
+}
+
+/* Standardized Typography Hierarchy */
+.font-signature {
+  font-family: 'Brittany Signature', 'Pinyon Script', 'Alex Brush', 'Parisienne', cursive;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1.15;
+  text-transform: none !important;
+  font-feature-settings: "liga" on, "clig" on;
+  -webkit-font-smoothing: antialiased;
+}
+
+.editorial-title {
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+  font-weight: 800;
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+.subheading-text {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  line-height: 1.65;
+  color: rgba(14, 16, 53, 0.75);
+  max-width: 44rem;
+  text-wrap: pretty;
+}
+
+/* Cohesive section rhythm */
+main > section {
+  scroll-margin-top: 6rem;
+}
+
+main > section:not(#hero-section) {
+  isolation: isolate;
+}
+
+/* Keep editorial sections icon-light while preserving navigation and modal controls. */
+main > section .lucide {
+  display: none;
+}
+
+#gallery-section .fixed .lucide {
+  display: block;
+}
+
+/*
+ * Borderless visual system
+ * The original design mixed outlined cards, dividers, tab underlines and
+ * bordered shapes. Surfaces, spacing and subtle shadows now provide hierarchy.
+ */
+*,
+*::before,
+*::after {
+  border-color: transparent !important;
+}
+
+[class*="divide-x"] > :not([hidden]) ~ :not([hidden]),
+[class*="divide-y"] > :not([hidden]) ~ :not([hidden]) {
+  border-color: transparent !important;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid rgba(20, 171, 250, 0.45);
+  outline-offset: 3px;
+}
+
+/* Shared website search field */
+.site-search-field {
+  width: 100%;
+  height: 3.25rem;
+  border: 0 !important;
+  border-radius: 9999px;
+  background: #F1F6FD;
+  padding: 0 3rem 0 1.25rem;
+  color: #0E1035;
+  font-size: 0.875rem;
+  font-weight: 400;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.site-search-field::placeholder {
+  color: rgba(14, 16, 53, 0.45);
+}
+
+.site-search-field--light {
+  background: #FFFFFF;
+}
+
+.site-search-field:focus,
+.site-search-field:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.site-search-caret {
+  display: inline-block;
+  width: 1.25rem;
+  color: #0E1035;
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1;
+  text-align: center;
+  transform: scaleX(1.25);
+  transform-origin: center;
+  transition: transform 200ms ease;
+}
+
+.site-search-caret.is-open {
+  transform: scaleX(1.25) rotate(180deg);
+}
+
+/* Shared plain-text tabs */
+.site-text-tab {
+  flex: 0 0 auto;
+  border: 0 !important;
+  background: transparent !important;
+  padding: 0.5rem 0;
+  color: rgba(14, 16, 53, 0.5);
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  white-space: nowrap;
+  box-shadow: none !important;
+  transition: color 180ms ease;
+}
+
+.site-text-tab:hover,
+.site-text-tab.is-active {
+  color: #0E1035;
+}
+
+.site-text-tab.is-active {
+  font-weight: 700;
+}
+
+.site-text-tab--primary {
+  font-size: 1.1rem;
+}
+
+.site-text-tab--dark {
+  color: rgba(255, 255, 255, 0.58);
+}
+
+.site-text-tab--dark:hover,
+.site-text-tab--dark.is-active {
+  color: #FFFFFF;
+}
+
+.site-text-tab-row {
+  column-gap: 2.25rem;
+  row-gap: 1rem;
+}
+
+.site-text-tab-row--secondary {
+  margin-top: 1.5rem !important;
+}
+
+/* Shape system
+   - Outer section and card surfaces stay architectural and square.
+   - Controls nested inside those surfaces use a full pill radius.
+   - Card-level actions remain visually quiet text links. */
+.outer-surface {
+  border-radius: 0 !important;
+}
+
+.inner-control {
+  border-radius: 9999px !important;
+}
+
+.site-content-image,
+.site-content-image-frame {
+  border-radius: 18px;
+}
+
+.site-content-image-frame {
+  overflow: hidden;
+}
+
+.site-image-card {
+  border-radius: 18px 18px 0 0 !important;
+}
+
+.card-action-link {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.45rem;
+  align-self: flex-start;
+  padding: 0.35rem 0 0.3rem;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: #0E1035;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: 0.08em;
+  text-align: left;
+  text-transform: uppercase;
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.35em;
+  transition: color 180ms ease, border-color 180ms ease;
+}
+
+.card-action-link:hover {
+  color: #14ABFA;
+  text-decoration-line: underline;
+}
+
+.card-action-link:focus-visible {
+  outline: 2px solid #14ABFA;
+  outline-offset: 4px;
+}
+
+.card-action-link--dark {
+  color: #FFFFFF;
+}
+
+.card-action-link--dark:hover {
+  color: #2FE0C0;
+}
+
+.resort-action-link,
+.resort-action-link:hover,
+.resort-action-link:focus-visible,
+.resort-action-link:active {
+  color: var(--resort-action-color, #0E1035);
+}
+
+@media (max-width: 640px) {
+  .site-text-tab-row {
+    column-gap: 1.5rem;
+  }
+}
+
+.btn-primary {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.editorial-tag {
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.6875rem;
+  font-weight: 700;
+}
+
+@keyframes pulse-subtle {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.03);
+    opacity: 0.92;
+  }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 3s ease-in-out infinite;
+}
+
+/* Infinity Space Animations */
+@keyframes infiniteDrift {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  33% {
+    transform: scale(1.08) translate(-1.5%, 2%);
+  }
+  66% {
+    transform: scale(1.05) translate(1.5%, -1.5%);
+  }
+  100% {
+    transform: scale(1) translate(0, 0);
+  }
+}
+
+@keyframes starTwinkle {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.25);
+  }
+}
+
+@keyframes spaceFloatSlow {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(180deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(360deg);
+  }
+}
+
+@keyframes nebulaPulse {
+  0%, 100% {
+    opacity: 0.35;
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    opacity: 0.65;
+    transform: scale(1.15) rotate(45deg);
+  }
+}
+
+.animate-infinite-drift {
+  animation: infiniteDrift 28s ease-in-out infinite alternate;
+}
+
+.animate-star-twinkle-1 {
+  animation: starTwinkle 3s ease-in-out infinite;
+}
+
+.animate-star-twinkle-2 {
+  animation: starTwinkle 4.5s ease-in-out infinite 1.5s;
+}
+
+.animate-star-twinkle-3 {
+  animation: starTwinkle 6s ease-in-out infinite 3s;
+}
+
+.animate-nebula-pulse {
+  animation: nebulaPulse 18s ease-in-out infinite;
+}
+
+.animate-space-float {
+  animation: spaceFloatSlow 22s linear infinite;
+}
+
+/* Marquee Logo Carousel Animations */
+@keyframes marqueeScroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll 35s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F1F6FD;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #14ABFA;
+}
+
+/* Dedicated Print Styles */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #0E1035 !important;
+  }
+  header, nav, footer, #hero-section, #deals-section, #quiz-section, #why-us-section, #perks-section, #gallery-section, #tips-section, #reviews-section, #quote-builder-section, #faq-section, #socials-section {
+    display: none !important;
+  }
+  #article-reader-modal-overlay {
+    position: static !important;
+    background: transparent !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+  #article-reader-dialog {
+    max-width: 100% !important;
+    max-height: none !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+  }
+}

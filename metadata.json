@@ -1,0 +1,6 @@
+{
+  "name": "Oceanique Cruise & Vacations",
+  "description": "Full-service luxury travel and vacation agency featuring ocean cruises, river cruises, all-inclusive resorts, guided tours, perks calculator, and personalized concierge planning by Narmin and Naushad Kermally.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

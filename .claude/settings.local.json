@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(npm run dev)",
+      "PowerShell(npm run lint)",
+      "PowerShell(Get-Command chromium-cli -ErrorAction SilentlyContinue)",
+      "PowerShell(try { $r = Invoke-WebRequest -Uri http://localhost:3000/ -UseBasicParsing -TimeoutSec 10; Write-Output \"STATUS: $\\($r.StatusCode\\)\" } catch { Write-Output \"ERROR: $_\" })",
+      "PowerShell($paths = @\\(\"$env:ProgramFiles\\\\Microsoft\\\\Edge\\\\Application\\\\msedge.exe\",\"${env:ProgramFiles\\(x86\\)}\\\\Microsoft\\\\Edge\\\\Application\\\\msedge.exe\",\"$env:ProgramFiles\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe\",\"${env:ProgramFiles\\(x86\\)}\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe\"\\); foreach \\($p in $paths\\) { Write-Output \"$p : $\\(Test-Path $p\\)\" })",
+      "PowerShell(node --version)",
+      "PowerShell(Get-Process chrome -ErrorAction SilentlyContinue)",
+      "PowerShell(Stop-Process -Force -ErrorAction SilentlyContinue)",
+      "WebFetch(domain:unsplash.com)",
+      "WebSearch",
+      "PowerShell(gh --version 2>&1)",
+      "PowerShell(gh auth status 2>&1)",
+      "PowerShell(npx --yes wrangler --version 2>&1)",
+      "PowerShell(Get-Command winget -ErrorAction SilentlyContinue)",
+      "PowerShell(winget install --id Git.Git -e --accept-package-agreements --accept-source-agreements)",
+      "PowerShell(Get-ChildItem -Path \"$env:ProgramFiles\",\"$env:LOCALAPPDATA\\\\Programs\",\"$env:ProgramFiles\\(x86\\)\" -Filter \"git.exe\" -Recurse -ErrorAction SilentlyContinue -Depth 3 | Select-Object -ExpandProperty FullName)",
+      "PowerShell(& \"$env:LOCALAPPDATA\\\\Programs\\\\Git\\\\bin\\\\git.exe\" --version)"
+    ]
+  }
+}
