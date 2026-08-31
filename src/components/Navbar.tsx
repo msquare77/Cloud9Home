@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
 
+const CLOUD9_LOGO = new URL('../../assets/Cloud 9 Logo.png', import.meta.url).href;
+
 interface NavbarProps {
   onOpenBookingModal: (dealTitle?: string) => void;
   onSelectSection: (sectionId: string, subpageKey?: string) => void;
@@ -201,7 +203,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBookingModal, onSelectSect
             className="flex items-center gap-3 text-left group focus:outline-none cursor-pointer"
           >
             <img
-              src="/assets/Cloud 9 Logo.png"
+              src={CLOUD9_LOGO}
               alt="Cloud 9 Travels — Naushad and Narmin Kermally"
               className="w-28 sm:w-36 h-20 object-contain shrink-0"
             />

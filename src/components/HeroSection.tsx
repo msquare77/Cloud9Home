@@ -4,6 +4,11 @@ import { VacationMatcherBox } from './VacationMatcherBox';
 
 const HERO_CRUISE_IMAGE = new URL('../../assets/magnific/hero-cruise.png', import.meta.url).href;
 const GIVEAWAY_IMAGE = new URL('../../assets/magnific/resort-3.jpg', import.meta.url).href;
+const PARTNER_ROYAL_CARIBBEAN = new URL('../../assets/Untitled-1_0004_il_fullxfull.1868834064_mdde.png', import.meta.url).href;
+const PARTNER_CELEBRITY = new URL('../../assets/Untitled-1_0000_celebrity-cruises-3-logo-png-transparent.png', import.meta.url).href;
+const PARTNER_SANDALS = new URL('../../assets/Untitled-1_0003_sandals-1-logo-png-transparent.png', import.meta.url).href;
+const PARTNER_AMAWATERWAYS = new URL('../../assets/Untitled-1_0001_0x0.png', import.meta.url).href;
+const PARTNER_DISNEY = new URL('../../assets/Untitled-1_0002_Disney-Cruise-Line-Symbol.png', import.meta.url).href;
 
 interface HeroSectionProps {
   filters: CruiseFilterState;
@@ -103,11 +108,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   Global Partners
                 </h3>
                 <div className="grid grid-cols-3 sm:grid-cols-5 items-center gap-4 sm:gap-5">
-                  <img src="/assets/Untitled-1_0004_il_fullxfull.1868834064_mdde.png" alt="Royal Caribbean" className="w-full h-12 object-contain drop-shadow-sm" />
-                  <img src="/assets/Untitled-1_0000_celebrity-cruises-3-logo-png-transparent.png" alt="Celebrity Cruises" className="w-full h-12 object-contain drop-shadow-sm" />
-                  <img src="/assets/Untitled-1_0003_sandals-1-logo-png-transparent.png" alt="Sandals Resorts" className="w-full h-12 object-contain drop-shadow-sm" />
-                  <img src="/assets/Untitled-1_0001_0x0.png" alt="AmaWaterways" className="w-full h-12 object-contain drop-shadow-sm" />
-                  <img src="/assets/Untitled-1_0002_Disney-Cruise-Line-Symbol.png" alt="Disney Cruise Line" className="w-full h-12 object-contain drop-shadow-sm" />
+                  <img src={PARTNER_ROYAL_CARIBBEAN} alt="Royal Caribbean" className="w-full h-12 object-contain drop-shadow-sm" />
+                  <img src={PARTNER_CELEBRITY} alt="Celebrity Cruises" className="w-full h-12 object-contain drop-shadow-sm" />
+                  <img src={PARTNER_SANDALS} alt="Sandals Resorts" className="w-full h-12 object-contain drop-shadow-sm" />
+                  <img src={PARTNER_AMAWATERWAYS} alt="AmaWaterways" className="w-full h-12 object-contain drop-shadow-sm" />
+                  <img src={PARTNER_DISNEY} alt="Disney Cruise Line" className="w-full h-12 object-contain drop-shadow-sm" />
                 </div>
               </div>
             </div>

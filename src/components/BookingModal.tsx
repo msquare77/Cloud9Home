@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { X } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
+const CLOUD9_MARK = new URL('../../assets/cloud9-mark.png', import.meta.url).href;
+
 interface BookingModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -83,7 +85,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
 
           <div className="flex items-start gap-4 pr-10">
             <img
-              src="/assets/cloud9-mark.png"
+              src={CLOUD9_MARK}
               alt="Cloud 9 Travels"
               className="w-11 h-11 object-contain shrink-0"
             />

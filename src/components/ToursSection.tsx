@@ -1,5 +1,9 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 
+const TOUR_IMAGE_1 = new URL('../../assets/magnific/tour-1.jpg', import.meta.url).href;
+const TOUR_IMAGE_2 = new URL('../../assets/magnific/tour-2.jpg', import.meta.url).href;
+const TOUR_IMAGE_3 = new URL('../../assets/magnific/tour-3.jpg', import.meta.url).href;
+
 interface ToursSectionProps {
   onOpenBookingModal: (dealTitle?: string) => void;
   initialSubpage?: string;
@@ -14,9 +18,9 @@ interface TourSubcategory {
 }
 
 export const TOUR_IMAGES = [
-  '/assets/magnific/tour-1.jpg',
-  '/assets/magnific/tour-2.jpg',
-  '/assets/magnific/tour-3.jpg',
+  TOUR_IMAGE_1,
+  TOUR_IMAGE_2,
+  TOUR_IMAGE_3,
   'https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1200&q=82',
   'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=82',
   'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=82',

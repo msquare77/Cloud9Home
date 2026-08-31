@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+const CLOUD9_LOGO = new URL('../../assets/Cloud 9 Logo.png', import.meta.url).href;
+
 interface FooterProps {
   onSelectSection: (sectionId: string) => void;
   onOpenBookingModal: () => void;
@@ -61,7 +63,7 @@ export const Footer: React.FC<FooterProps> = ({ onSelectSection, onOpenBookingMo
             <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
               <div>
                 <img
-                  src="/assets/Cloud 9 Logo.png"
+                  src={CLOUD9_LOGO}
                   alt="Cloud 9 Travels — Narmin and Naushad Kermally"
                   className="mb-4 h-24 w-48 object-contain object-left sm:h-28 sm:w-56"
                 />
