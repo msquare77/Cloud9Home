@@ -3,6 +3,7 @@ import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { VacationExplorerSection } from './components/VacationExplorerSection';
 import { CruisesSection } from './components/CruisesSection';
+import { VisualJourneysGallery } from './components/VisualJourneysGallery';
 import { SocialCommunityHub } from './components/SocialCommunityHub';
 import { CompetitiveMatrix } from './components/CompetitiveMatrix';
 import { PerksCalculator } from './components/PerksCalculator';
@@ -140,6 +141,9 @@ export default function App() {
           onOpenBookingModal={handleOpenBookingModal}
           onNavigateToSection={handleScrollToSection}
         />
+
+        {/* 3.5. VISUAL JOURNEYS GALLERY */}
+        <VisualJourneysGallery />
 
         {/* 4. CRUISES AND EXPEDITIONS */}
         <CruisesSection
