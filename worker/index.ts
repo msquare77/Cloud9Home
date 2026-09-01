@@ -1,26 +1,23 @@
-interface Env {
-  META_GRAPH_API_VERSION?: string;
-  META_INSTAGRAM_USER_ID?: string;
-  META_INSTAGRAM_ACCESS_TOKEN?: string;
-  META_FACEBOOK_PAGE_ID?: string;
-  META_FACEBOOK_PAGE_ACCESS_TOKEN?: string;
+interface Fetcher {
+  fetch(request: Request): Promise<Response>;
 }
 
-interface PagesContext {
-  request: Request;
-  env: Env;
+export interface Env {
+  ASSETS: Fetcher;
+  META_GRAPH_API_VERSION?: string;
+  META_FACEBOOK_PAGE_ID?: string;
+  META_FACEBOOK_PAGE_ACCESS_TOKEN?: string;
+  META_INSTAGRAM_USER_ID?: string;
+  META_INSTAGRAM_ACCESS_TOKEN?: string;
 }
 
 const json = (body: unknown, status = 200): Response =>
   new Response(JSON.stringify(body), {
     status,
-    headers: {
-      'Content-Type': 'application/json',
-      'Cache-Control': 'public, max-age=300',
-    },
+    headers: { 'Content-Type': 'application/json', 'Cache-Control': 'public, max-age=300' },
   });
 
-export const onRequestGet = async ({ request, env }: PagesContext): Promise<Response> => {
+async function handleSocialFeed(request: Request, env: Env): Promise<Response> {
   const url = new URL(request.url);
   const platform = url.searchParams.get('platform');
   const isInstagram = platform === 'instagram';
@@ -63,9 +60,16 @@ export const onRequestGet = async ({ request, env }: PagesContext): Promise<Resp
 
     return json({ posts });
   } catch (error) {
-    return json({
-      posts: [],
-      message: error instanceof Error ? error.message : 'Unable to load the live social feed.',
-    }, 502);
+    return json({ posts: [], message: error instanceof Error ? error.message : 'Unable to load the live social feed.' }, 502);
   }
+}
+
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    const url = new URL(request.url);
+    if (url.pathname === '/api/social-feed') {
+      return handleSocialFeed(request, env);
+    }
+    return env.ASSETS.fetch(request);
+  },
 };

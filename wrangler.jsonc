@@ -1,0 +1,9 @@
+{
+  "name": "cloud9-1",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-08-31",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS"
+  }
+}
