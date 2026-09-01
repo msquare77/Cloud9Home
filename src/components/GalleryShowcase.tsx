@@ -9,7 +9,7 @@ import { DESTINATIONS } from './DestinationsSection';
 import { ViewMoreToggle } from './ViewMoreToggle';
 
 type PortfolioCategory = 'cruises' | 'resorts' | 'tours' | 'luxury' | 'destinations';
-type PrimaryCategory = 'all' | PortfolioCategory;
+export type PrimaryCategory = 'all' | PortfolioCategory;
 
 interface GalleryItem {
   id: string;
@@ -181,9 +181,19 @@ const overviewItems = (): GalleryItem[] => [
   destinationItems()[0],
 ].filter((item): item is GalleryItem => Boolean(item));
 
-export const GalleryShowcase: React.FC = () => {
-  const [selectedCategory, setSelectedCategory] = useState<PrimaryCategory>('all');
-  const [selectedSubcategory, setSelectedSubcategory] = useState<string>('all');
+interface GalleryShowcaseProps {
+  initialCategory?: string;
+}
+
+const normalizeInitialCategory = (value?: string): PrimaryCategory =>
+  PRIMARY_CATEGORIES.some(category => category.id === value) ? (value as PrimaryCategory) : 'all';
+
+export const GalleryShowcase: React.FC<GalleryShowcaseProps> = ({ initialCategory }) => {
+  const normalizedInitialCategory = normalizeInitialCategory(initialCategory);
+  const [selectedCategory, setSelectedCategory] = useState<PrimaryCategory>(normalizedInitialCategory);
+  const [selectedSubcategory, setSelectedSubcategory] = useState<string>(
+    normalizedInitialCategory === 'all' ? 'all' : DEFAULT_SUBCATEGORY[normalizedInitialCategory],
+  );
   const [activeItemIndex, setActiveItemIndex] = useState<number | null>(null);
   const [showAll, setShowAll] = useState(false);
 

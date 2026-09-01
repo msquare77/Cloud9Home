@@ -1,42 +1,44 @@
 import React from 'react';
 import { CircularGallery, GalleryItem } from './CircularGallery';
 
-const JOURNEY_ITEMS: GalleryItem[] = [
+interface VisualJourneysGalleryProps {
+  onNavigateToSection: (sectionId: string, subpageKey?: string) => void;
+}
+
+const CATEGORY_ITEMS: (GalleryItem & { categoryId: string })[] = [
   {
-    image: 'https://images.unsplash.com/photo-1461250281059-4f83443edbdc?auto=format&fit=crop&w=1200&q=80',
-    text: 'Alaska Glaciers',
-  },
-  {
-    image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80',
-    text: 'Turks & Caicos',
-  },
-  {
+    categoryId: 'all',
+    text: 'All Portfolio',
     image: 'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=1200&q=80',
-    text: 'Santorini, Greece',
   },
   {
-    image: 'https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=1200&q=80',
-    text: 'All-Inclusive Resorts',
+    categoryId: 'cruises',
+    text: 'Cruises',
+    image: 'https://images.unsplash.com/photo-1548574505-5e239809ee19?auto=format&fit=crop&w=1200&q=80',
   },
   {
-    image: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=80',
-    text: 'Luxury Suites',
-  },
-  {
-    image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80',
-    text: 'Signature Dining',
-  },
-  {
+    categoryId: 'resorts',
+    text: 'Resorts',
     image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=80',
-    text: 'Ocean Balcony Suites',
   },
   {
+    categoryId: 'tours',
+    text: 'Tours',
     image: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1200&q=80',
-    text: 'African Safaris',
+  },
+  {
+    categoryId: 'destinations',
+    text: 'Destinations',
+    image: 'https://images.unsplash.com/photo-1461250281059-4f83443edbdc?auto=format&fit=crop&w=1200&q=80',
+  },
+  {
+    categoryId: 'luxury',
+    text: 'Luxury',
+    image: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=80',
   },
 ];
 
-export const VisualJourneysGallery: React.FC = () => {
+export const VisualJourneysGallery: React.FC<VisualJourneysGalleryProps> = ({ onNavigateToSection }) => {
   return (
     <section className="bg-[#0E1035] py-20 sm:py-28">
       <div className="w-full max-w-[1640px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
@@ -50,18 +52,19 @@ export const VisualJourneysGallery: React.FC = () => {
             </h2>
           </div>
           <p className="text-sm sm:text-base text-white/60 font-medium max-w-sm lg:text-right">
-            Drag or scroll to explore the cruises, resorts, and destinations your Cloud 9 travel advisor can bring to life.
+            Drag or scroll to browse by category, then dive into the full Vacation Visual Library.
           </p>
         </div>
       </div>
 
       <div className="h-[420px] sm:h-[520px] lg:h-[600px] w-full">
         <CircularGallery
-          items={JOURNEY_ITEMS}
+          items={CATEGORY_ITEMS}
           bend={2.5}
           borderRadius={0.06}
           scrollEase={0.04}
           fontClassName="text-white/85 text-2xl font-semibold"
+          onItemClick={(index) => onNavigateToSection('gallery-section', CATEGORY_ITEMS[index].categoryId)}
         />
       </div>
     </section>

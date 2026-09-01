@@ -48,6 +48,7 @@ export default function App() {
   const [activeDealSubpage, setActiveDealSubpage] = useState<string>('all');
   const [activeExtraSubpage, setActiveExtraSubpage] = useState<string>('all');
   const [activePaySubpage, setActivePaySubpage] = useState<string>('payment');
+  const [activeGalleryCategory, setActiveGalleryCategory] = useState<string>('all');
 
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
   const [selectedDealTitle, setSelectedDealTitle] = useState<string | undefined>(undefined);
@@ -70,6 +71,7 @@ export default function App() {
       if (sectionId === 'deals-section') setActiveDealSubpage(subpageKey);
       if (sectionId === 'extras-section') setActiveExtraSubpage(subpageKey);
       if (sectionId === 'pay-now-section') setActivePaySubpage(subpageKey);
+      if (sectionId === 'gallery-section') setActiveGalleryCategory(subpageKey);
     }
 
     const el = document.getElementById(sectionId);
@@ -147,7 +149,7 @@ export default function App() {
         />
 
         {/* 3.5. VISUAL JOURNEYS GALLERY */}
-        <VisualJourneysGallery />
+        <VisualJourneysGallery onNavigateToSection={handleScrollToSection} />
 
         {/* 4. CRUISES AND EXPEDITIONS */}
         <CruisesSection
@@ -214,7 +216,10 @@ export default function App() {
         />
 
         {/* 16. High-Resolution Ship & Port Gallery */}
-        <GalleryShowcase />
+        <GalleryShowcase
+          initialCategory={activeGalleryCategory}
+          key={`gallery-${activeGalleryCategory}`}
+        />
 
         {/* 17. Family Guides & Stateroom Insider Tips */}
         <FamilyTravelTips onOpenArticle={handleOpenArticle} />

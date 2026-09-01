@@ -24,6 +24,7 @@ interface CircularGalleryProps extends React.HTMLAttributes<HTMLDivElement> {
   scrollSpeed?: number;
   scrollEase?: number;
   fontClassName?: string;
+  onItemClick?: (index: number) => void;
 }
 
 function debounce(func: (...args: any[]) => void, wait: number) {
@@ -387,6 +388,7 @@ class App {
   scrollSpeed: number;
   scroll: { ease: number; current: number; target: number; last: number; position: number };
   onCheckDebounce: () => void;
+  onItemClick?: (index: number) => void;
   renderer!: Renderer;
   gl!: OGLRenderingContext;
   camera!: Camera;
@@ -394,8 +396,10 @@ class App {
   planeGeometry!: Plane;
   mediasImages!: GalleryItem[];
   medias!: Media[];
+  itemCount: number = 0;
   isDown: boolean = false;
   start: number = 0;
+  startY: number = 0;
   screen!: { width: number; height: number };
   viewport!: { width: number; height: number };
   raf!: number;
@@ -403,7 +407,7 @@ class App {
   boundOnWheel!: (e: WheelEvent) => void;
   boundOnTouchDown!: (e: MouseEvent | TouchEvent) => void;
   boundOnTouchMove!: (e: MouseEvent | TouchEvent) => void;
-  boundOnTouchUp!: () => void;
+  boundOnTouchUp!: (e: MouseEvent | TouchEvent) => void;
 
   constructor(
     container: HTMLElement,
@@ -415,6 +419,7 @@ class App {
       font,
       scrollSpeed,
       scrollEase,
+      onItemClick,
     }: {
       items?: GalleryItem[];
       bend: number;
@@ -423,12 +428,14 @@ class App {
       font: string;
       scrollSpeed: number;
       scrollEase: number;
+      onItemClick?: (index: number) => void;
     },
   ) {
     this.container = container;
     this.scrollSpeed = scrollSpeed;
     this.scroll = { ease: scrollEase, current: 0, target: 0, last: 0, position: 0 };
     this.onCheckDebounce = debounce(this.onCheck.bind(this), 200);
+    this.onItemClick = onItemClick;
 
     autoBind(this);
 
@@ -478,6 +485,7 @@ class App {
     ];
 
     const galleryItems = items && items.length > 0 ? items : defaultItems;
+    this.itemCount = galleryItems.length;
     this.mediasImages = [...galleryItems, ...galleryItems];
     this.medias = this.mediasImages.map((data, index) => {
       return new Media({
@@ -503,6 +511,7 @@ class App {
     this.isDown = true;
     this.scroll.position = this.scroll.current;
     this.start = 'touches' in e ? e.touches[0].clientX : e.clientX;
+    this.startY = 'touches' in e ? e.touches[0].clientY : e.clientY;
   }
 
   onTouchMove(e: MouseEvent | TouchEvent) {
@@ -512,9 +521,36 @@ class App {
     this.scroll.target = this.scroll.position + distance;
   }
 
-  onTouchUp() {
+  onTouchUp(e: MouseEvent | TouchEvent) {
     this.isDown = false;
     this.onCheck();
+
+    const endX = 'changedTouches' in e ? e.changedTouches[0].clientX : (e as MouseEvent).clientX;
+    const endY = 'changedTouches' in e ? e.changedTouches[0].clientY : (e as MouseEvent).clientY;
+    const movedX = Math.abs(endX - this.start);
+    const movedY = Math.abs(endY - this.startY);
+
+    if (this.onItemClick && movedX < 6 && movedY < 6) {
+      this.handleClick(endX, endY);
+    }
+  }
+
+  handleClick(clientX: number, clientY: number) {
+    if (!this.medias || !this.itemCount) return;
+    const rect = this.container.getBoundingClientRect();
+    if (clientX < rect.left || clientX > rect.right || clientY < rect.top || clientY > rect.bottom) return;
+
+    const planeX = ((clientX - rect.left) / this.screen.width - 0.5) * this.viewport.width;
+    const planeY = (0.5 - (clientY - rect.top) / this.screen.height) * this.viewport.height;
+
+    for (const media of this.medias) {
+      const halfW = media.plane.scale.x / 2;
+      const halfH = media.plane.scale.y / 2;
+      if (Math.abs(planeX - media.plane.position.x) <= halfW && Math.abs(planeY - media.plane.position.y) <= halfH) {
+        this.onItemClick!(media.index % this.itemCount);
+        return;
+      }
+    }
   }
 
   onWheel(e: WheelEvent) {
@@ -602,9 +638,12 @@ export const CircularGallery: React.FC<CircularGalleryProps> = ({
   scrollEase = 0.05,
   className,
   fontClassName,
+  onItemClick,
   ...props
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const onItemClickRef = useRef(onItemClick);
+  onItemClickRef.current = onItemClick;
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -625,6 +664,7 @@ export const CircularGallery: React.FC<CircularGalleryProps> = ({
       font: computedFont,
       scrollSpeed,
       scrollEase,
+      onItemClick: (index) => onItemClickRef.current?.(index),
     });
 
     return () => {
