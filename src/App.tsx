@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Navbar } from './components/Navbar';
+import { SplashScreen } from './components/SplashScreen';
 import { HeroSection } from './components/HeroSection';
 import { VacationExplorerSection } from './components/VacationExplorerSection';
 import { CruisesSection } from './components/CruisesSection';
@@ -115,6 +116,9 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#F1F6FD] text-[#0E1035] flex flex-col selection:bg-[#14ABFA]/20 selection:text-[#0E1035]">
+      {/* 0. Cloud Portal Splash Screen */}
+      <SplashScreen />
+
       {/* 1. Header & Navigation with Dream Vacations Hierarchy */}
       <Navbar
         onOpenBookingModal={handleOpenBookingModal}

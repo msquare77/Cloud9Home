@@ -431,6 +431,65 @@ textarea:focus-visible {
   animation-play-state: paused;
 }
 
+/* Splash Screen Animations */
+@keyframes splashKenburns {
+  0% {
+    transform: scale(1.06);
+  }
+  100% {
+    transform: scale(1.18);
+  }
+}
+
+.animate-splash-kenburns {
+  animation: splashKenburns 20s ease-in-out infinite alternate;
+}
+
+@keyframes splashRipple {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+.animate-splash-ripple {
+  animation: splashRipple 3.8s ease-out infinite;
+}
+
+@keyframes splashFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-splash-float {
+  animation-name: splashFloat;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@keyframes splashFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-splash-fade-in {
+  animation: splashFadeIn 0.9s ease-out both;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 7px;
