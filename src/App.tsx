@@ -20,6 +20,7 @@ import { FaqSection } from './components/FaqSection';
 import { ConversionCtaBanner } from './components/ConversionCtaBanner';
 import { PayNowSection } from './components/PayNowSection';
 import { Footer } from './components/Footer';
+import { WhatsAppButton } from './components/WhatsAppButton';
 import { BookingModal } from './components/BookingModal';
 import { ItineraryModal } from './components/ItineraryModal';
 import { ArticleReaderModal } from './components/ArticleReaderModal';
@@ -232,6 +233,9 @@ export default function App() {
         onSelectSection={handleScrollToSection}
         onOpenBookingModal={() => handleOpenBookingModal()}
       />
+
+      {/* Sticky WhatsApp Contact Button */}
+      <WhatsAppButton />
 
       {/* Interactive Booking / Free Quote Modal */}
       <BookingModal
