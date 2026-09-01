@@ -587,10 +587,9 @@ const formatPrice = (price: number) => `$${price.toLocaleString('en-US')}`;
 
 export const VacationMatcherBox: React.FC<VacationMatcherBoxProps> = ({ onNavigateToMatch }) => {
   const [answers, setAnswers] = useState<Answers>(EMPTY_ANSWERS);
-  const [historyStack, setHistoryStack] = useState<(StepId | 'results')[]>([]);
+  const [historyStack, setHistoryStack] = useState<(StepId | 'results')[]>(['party']);
   const [showMore, setShowMore] = useState(false);
 
-  const started = historyStack.length > 0;
   const currentStepId = historyStack[historyStack.length - 1];
   const showResults = currentStepId === 'results';
 
@@ -631,10 +630,10 @@ export const VacationMatcherBox: React.FC<VacationMatcherBoxProps> = ({ onNaviga
     pushNext(answers);
   };
 
-  const goBack = () => setHistoryStack(h => (h.length <= 1 ? [] : h.slice(0, -1)));
+  const goBack = () => setHistoryStack(h => (h.length <= 1 ? h : h.slice(0, -1)));
   const restart = () => {
     setAnswers(EMPTY_ANSWERS);
-    setHistoryStack([]);
+    setHistoryStack(['party']);
     setShowMore(false);
   };
 
@@ -663,39 +662,22 @@ export const VacationMatcherBox: React.FC<VacationMatcherBoxProps> = ({ onNaviga
             {showResults ? 'Your personalized vacation shortlist' : 'Answer a few quick questions — we\'ll find your best-fit vacation.'}
           </p>
         </div>
-        {started && (
-          <button
-            type="button"
-            onClick={restart}
-            className="shrink-0 text-[10px] font-black uppercase tracking-wider text-[#0E1035]/50 hover:text-[#14ABFA] cursor-pointer"
-          >
-            Start Over
-          </button>
-        )}
+        <button
+          type="button"
+          onClick={restart}
+          className="shrink-0 text-[10px] font-black uppercase tracking-wider text-[#0E1035]/50 hover:text-[#14ABFA] cursor-pointer"
+        >
+          Start Over
+        </button>
       </div>
 
-      {!started && (
-        <div className="bg-[#F1F6FD] p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
-          <p className="text-sm text-[#0E1035]/75 font-medium max-w-md">
-            A few quick questions about who's traveling, what you love and what you can spend — and Cloud9 Genie will surface your best-fit cruise, resort, tour or adventure.
-          </p>
-          <button
-            type="button"
-            onClick={() => setHistoryStack(['party'])}
-            className="shrink-0 px-7 py-3.5 bg-[#0E1035] hover:bg-[#14ABFA] text-white hover:text-[#0E1035] text-xs font-black uppercase tracking-wider transition-colors cursor-pointer"
-          >
-            Find My Vacation
-          </button>
-        </div>
-      )}
-
-      {started && !showResults && currentDef && (
+      {!showResults && currentDef && (
         <div>
           <div className="flex items-center justify-between mb-5">
             <span className="text-[10px] font-black uppercase tracking-widest text-[#14ABFA]">
               Question {currentPosition} of {activeSteps.length}
             </span>
-            {historyStack.length > 0 && (
+            {historyStack.length > 1 && (
               <button
                 type="button"
                 onClick={goBack}
