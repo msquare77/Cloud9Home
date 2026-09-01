@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
 
 const CLOUD9_LOGO = new URL('../../assets/Cloud 9 Logo.png', import.meta.url).href;
+const DREAM_VACATIONS_LOGO = new URL('../../assets/dream-vacations-logo-color.svg', import.meta.url).href;
 
 interface NavbarProps {
   onOpenBookingModal: (dealTitle?: string) => void;
@@ -198,16 +199,24 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBookingModal, onSelectSect
         <div className="w-full max-w-[1640px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 flex items-center justify-between">
           
           {/* Editorial Brand Logo */}
-          <button 
-            onClick={() => handleNavClick('hero-section')} 
-            className="flex items-center gap-3 text-left group focus:outline-none cursor-pointer"
-          >
+          <div className="flex items-center gap-3 sm:gap-4">
+            <button
+              onClick={() => handleNavClick('hero-section')}
+              className="flex items-center gap-3 text-left group focus:outline-none cursor-pointer"
+            >
+              <img
+                src={CLOUD9_LOGO}
+                alt="Cloud 9 Travels — Naushad and Narmin Kermally"
+                className="w-28 sm:w-36 h-20 object-contain shrink-0"
+              />
+            </button>
+            <div className="hidden sm:block w-px h-9 bg-[#0E1035]/15 shrink-0" aria-hidden="true" />
             <img
-              src={CLOUD9_LOGO}
-              alt="Cloud 9 Travels — Naushad and Narmin Kermally"
-              className="w-28 sm:w-36 h-20 object-contain shrink-0"
+              src={DREAM_VACATIONS_LOGO}
+              alt="Dream Vacations — Start Here"
+              className="hidden sm:block w-24 md:w-28 h-auto object-contain shrink-0"
             />
-          </button>
+          </div>
 
           {/* Desktop Navigation Links with Dream Vacations Hierarchy */}
           <div className="hidden xl:flex items-center gap-5 2xl:gap-7 text-xs font-semibold uppercase tracking-normal text-[#0E1035]">

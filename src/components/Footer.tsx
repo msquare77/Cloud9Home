@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 const CLOUD9_LOGO = new URL('../../assets/Cloud 9 Logo.png', import.meta.url).href;
+const DREAM_VACATIONS_LOGO = new URL('../../assets/dream-vacations-logo-color.svg', import.meta.url).href;
 
 interface FooterProps {
   onSelectSection: (sectionId: string) => void;
@@ -62,11 +63,19 @@ export const Footer: React.FC<FooterProps> = ({ onSelectSection, onOpenBookingMo
             {/* Left Narrative & VIP Travel Club Column */}
             <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
               <div>
-                <img
-                  src={CLOUD9_LOGO}
-                  alt="Cloud 9 Travels — Narmin and Naushad Kermally"
-                  className="mb-4 h-24 w-48 object-contain object-left sm:h-28 sm:w-56"
-                />
+                <div className="flex items-center gap-4 mb-4">
+                  <img
+                    src={CLOUD9_LOGO}
+                    alt="Cloud 9 Travels — Narmin and Naushad Kermally"
+                    className="h-24 w-48 object-contain object-left sm:h-28 sm:w-56"
+                  />
+                  <div className="w-px h-14 bg-[#0E1035]/15 shrink-0" aria-hidden="true" />
+                  <img
+                    src={DREAM_VACATIONS_LOGO}
+                    alt="Dream Vacations — Start Here"
+                    className="h-10 sm:h-12 w-auto object-contain shrink-0"
+                  />
+                </div>
                 <span className="text-[11px] font-black uppercase tracking-widest text-[#14ABFA] block mb-1">
                   Cloud 9 Travels • Dream Vacations Franchise
                 </span>
