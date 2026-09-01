@@ -119,7 +119,7 @@ export const DESTINATIONS: DestinationListing[] = [
     id: 'mexico',
     name: 'Mexico',
     description: 'Caribbean beaches, expressive cuisine and enduring heritage.',
-    imageUrl: 'https://images.unsplash.com/photo-1512815767263-ef5a92a71bf6?auto=format&fit=crop&w=1200&q=84',
+    imageUrl: 'https://images.unsplash.com/photo-1664205543898-829ef8baa7ad?auto=format&fit=crop&w=1200&q=84',
     accent: '#2FE0C0'
   },
   {

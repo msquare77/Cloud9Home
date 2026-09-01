@@ -544,7 +544,7 @@ export const DESTINATION_GUIDES: DestinationGuide[] = [
     averageTemp: '84°F / 29°C',
     topAttractions: ['Tulum Cliffside Mayan Ruins', 'Cancun Underwater Museum', 'Cabo San Lucas El Arco', 'Chichen Itza UNESCO Wonder'],
     recommendedLines: ['Secrets & Dreams Resorts', 'Hyatt Ziva / Zilara', 'Royal Caribbean', 'Sandals'],
-    imageUrl: 'https://images.unsplash.com/photo-1512815767263-ef5a92a71bf6?auto=format&fit=crop&w=1000&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1664205543898-829ef8baa7ad?auto=format&fit=crop&w=1000&q=80',
     summary: 'Gourmet culinary journeys, swim-up suites, warm hospitality, and crystal-clear Caribbean cenotes make Mexico an unbeatable high-value getaway.',
     startingPrice: 699,
     bonusCredit: 400

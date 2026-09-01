@@ -347,7 +347,7 @@ export const CRUISE_DEALS: CruiseDeal[] = [
     ],
     rating: 4.97,
     reviewCount: 290,
-    imageUrl: 'https://images.unsplash.com/photo-1507525428033-b723cf961d3e?auto=format&fit=crop&w=1200&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1760564019101-c265521c08f9?auto=format&fit=crop&w=1200&q=80',
     badge: 'Luxury Adults-Only Mexico',
     familyFriendlyScore: 0,
     luxuryScore: 98,
@@ -722,9 +722,9 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     id: 'gal-act-1',
     title: 'Infinity Edge Suspended Ocean Pool',
     category: 'activities',
-    imageUrl: 'https://images.unsplash.com/photo-1507525428033-b723cf961d3e?auto=format&fit=crop&w=1200&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1760564019101-c265521c08f9?auto=format&fit=crop&w=1200&q=80',
     images: [
-      'https://images.unsplash.com/photo-1507525428033-b723cf961d3e?auto=format&fit=crop&w=1600&q=85',
+      'https://images.unsplash.com/photo-1760564019101-c265521c08f9?auto=format&fit=crop&w=1600&q=85',
       'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1600&q=85'
     ],
     caption: 'Tranquil daybeds, private cabanas, and handcrafted tropical cocktails by the pool.',
