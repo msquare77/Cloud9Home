@@ -28,11 +28,15 @@ import { ArticleReaderModal } from './components/ArticleReaderModal';
 import { CRUISE_DEALS } from './data/cruiseData';
 import { CruiseFilterState, CruiseDeal, TravelTip } from './types';
 
-const getPageFromLocation = (): 'home' | 'contact' =>
-  window.location.pathname.replace(/\/$/, '') === '/contact' ? 'contact' : 'home';
+const getPageFromLocation = (): 'home' | 'contact' | 'faq' => {
+  const path = window.location.pathname.replace(/\/$/, '');
+  if (path === '/contact') return 'contact';
+  if (path === '/faq') return 'faq';
+  return 'home';
+};
 
 export default function App() {
-  const [page, setPage] = useState<'home' | 'contact'>(getPageFromLocation);
+  const [page, setPage] = useState<'home' | 'contact' | 'faq'>(getPageFromLocation);
 
   useEffect(() => {
     const onPopState = () => setPage(getPageFromLocation());
@@ -85,7 +89,7 @@ export default function App() {
   const handleScrollToSection = (sectionId: string, subpageKey?: string) => {
     applySubpageSelection(sectionId, subpageKey);
 
-    if (page === 'contact') {
+    if (page !== 'home') {
       window.history.pushState({}, '', '/');
       setPage('home');
       window.setTimeout(() => {
@@ -100,6 +104,12 @@ export default function App() {
   const navigateToContact = () => {
     window.history.pushState({}, '', '/contact');
     setPage('contact');
+    window.scrollTo(0, 0);
+  };
+
+  const navigateToFaq = () => {
+    window.history.pushState({}, '', '/faq');
+    setPage('faq');
     window.scrollTo(0, 0);
   };
 
@@ -148,11 +158,14 @@ export default function App() {
       <Navbar
         onSelectSection={handleScrollToSection}
         onNavigateToContact={navigateToContact}
+        onNavigateToFaq={navigateToFaq}
       />
 
       <main className="flex-1">
         {page === 'contact' ? (
           <ContactPage />
+        ) : page === 'faq' ? (
+          <FaqSection onOpenBookingModal={() => handleOpenBookingModal()} />
         ) : (
           <>
         {/* 1. Hero Section with Live Search Engine & Concierge Spotlight */}
@@ -166,6 +179,13 @@ export default function App() {
           dealCount={CRUISE_DEALS.length}
         />
 
+        {/* 13. EXCLUSIVE PROMOTIONS & LIMITED DEALS */}
+        <DealsSection
+          onOpenBookingModal={handleOpenBookingModal}
+          initialSubpage={activeDealSubpage}
+          key={`deals-${activeDealSubpage}`}
+        />
+
         {/* 3. FIND YOUR PERFECT SHIP & VIBE (Interactive First-Timer Questionnaire) */}
         <VacationExplorerSection
           filters={filters}
@@ -177,13 +197,6 @@ export default function App() {
 
         {/* 3.5. VISUAL JOURNEYS GALLERY */}
         <VisualJourneysGallery onNavigateToSection={handleScrollToSection} />
-
-        {/* 13. EXCLUSIVE PROMOTIONS & LIMITED DEALS */}
-        <DealsSection
-          onOpenBookingModal={handleOpenBookingModal}
-          initialSubpage={activeDealSubpage}
-          key={`deals-${activeDealSubpage}`}
-        />
 
         {/* 4. CRUISES AND EXPEDITIONS */}
         <CruisesSection
@@ -250,10 +263,6 @@ export default function App() {
 
         {/* 18. Verified Voyager Testimonials */}
         <VoyagerTestimonials />
-
-        {/* 19. Frequently Asked Questions Accordion */}
-        <FaqSection onOpenBookingModal={() => handleOpenBookingModal()} />
-
 
         {/* 21. Bespoke Voyage CTA & Newsletter */}
         <ConversionCtaBanner onOpenBookingModal={() => handleOpenBookingModal()} />

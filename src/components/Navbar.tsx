@@ -7,6 +7,7 @@ const DREAM_VACATIONS_LOGO = new URL('../../assets/dream-vacations-logo-color.sv
 interface NavbarProps {
   onSelectSection: (sectionId: string, subpageKey?: string) => void;
   onNavigateToContact: () => void;
+  onNavigateToFaq: () => void;
 }
 
 interface NavSubpage {
@@ -22,7 +23,7 @@ interface NavMenuItem {
   subpages: NavSubpage[];
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onSelectSection, onNavigateToContact }) => {
+export const Navbar: React.FC<NavbarProps> = ({ onSelectSection, onNavigateToContact, onNavigateToFaq }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -273,6 +274,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onSelectSection, onNavigateToCon
               );
             })}
 
+            <button
+              onClick={onNavigateToFaq}
+              className="hover:text-[#14ABFA] transition-colors py-2 focus:outline-none cursor-pointer border-b-2 border-transparent hover:border-[#14ABFA]"
+            >
+              <span>FAQs</span>
+            </button>
+
           </div>
 
           {/* Call to Action Buttons */}
@@ -342,6 +350,18 @@ export const Navbar: React.FC<NavbarProps> = ({ onSelectSection, onNavigateToCon
                   </div>
                 );
               })}
+
+              <div className="border-b border-[#0E1035]/10 pb-1">
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    onNavigateToFaq();
+                  }}
+                  className="w-full py-2 text-left font-black text-xs uppercase tracking-wider text-[#0E1035]"
+                >
+                  <span>FAQs</span>
+                </button>
+              </div>
             </div>
 
             <div className="pt-3 border-t border-[#0E1035]/10 flex flex-col gap-2">
