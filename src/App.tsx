@@ -14,12 +14,9 @@ import { LuxurySection } from './components/LuxurySection';
 import { DestinationsSection } from './components/DestinationsSection';
 import { DealsSection } from './components/DealsSection';
 import { ContactPage } from './components/ContactPage';
-import { ExtrasSection } from './components/ExtrasSection';
-import { GalleryShowcase } from './components/GalleryShowcase';
 import { FamilyTravelTips } from './components/FamilyTravelTips';
 import { VoyagerTestimonials } from './components/VoyagerTestimonials';
 import { FaqSection } from './components/FaqSection';
-import { ConversionCtaBanner } from './components/ConversionCtaBanner';
 import { Footer } from './components/Footer';
 import { WhatsAppButton } from './components/WhatsAppButton';
 import { BookingModal } from './components/BookingModal';
@@ -60,8 +57,6 @@ export default function App() {
   const [activeLuxurySubpage, setActiveLuxurySubpage] = useState<string>('all');
   const [activeDestinationSubpage, setActiveDestinationSubpage] = useState<string>('all');
   const [activeDealSubpage, setActiveDealSubpage] = useState<string>('all');
-  const [activeExtraSubpage, setActiveExtraSubpage] = useState<string>('all');
-  const [activeGalleryCategory, setActiveGalleryCategory] = useState<string>('all');
 
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
   const [selectedDealTitle, setSelectedDealTitle] = useState<string | undefined>(undefined);
@@ -82,8 +77,6 @@ export default function App() {
     if (sectionId === 'luxury-section') setActiveLuxurySubpage(subpageKey);
     if (sectionId === 'destinations-section') setActiveDestinationSubpage(subpageKey);
     if (sectionId === 'deals-section') setActiveDealSubpage(subpageKey);
-    if (sectionId === 'extras-section') setActiveExtraSubpage(subpageKey);
-    if (sectionId === 'gallery-section') setActiveGalleryCategory(subpageKey);
   };
 
   const handleScrollToSection = (sectionId: string, subpageKey?: string) => {
@@ -245,27 +238,11 @@ export default function App() {
           key={`destinations-${activeDestinationSubpage}`}
         />
 
-        {/* 15. TRAVEL EXTRAS & CONCIERGE SERVICES */}
-        <ExtrasSection
-          onOpenBookingModal={handleOpenBookingModal}
-          initialSubpage={activeExtraSubpage}
-          key={`extras-${activeExtraSubpage}`}
-        />
-
-        {/* 16. High-Resolution Ship & Port Gallery */}
-        <GalleryShowcase
-          initialCategory={activeGalleryCategory}
-          key={`gallery-${activeGalleryCategory}`}
-        />
-
         {/* 17. Family Guides & Stateroom Insider Tips */}
         <FamilyTravelTips onOpenArticle={handleOpenArticle} />
 
         {/* 18. Verified Voyager Testimonials */}
         <VoyagerTestimonials />
-
-        {/* 21. Bespoke Voyage CTA & Newsletter */}
-        <ConversionCtaBanner onOpenBookingModal={() => handleOpenBookingModal()} />
           </>
         )}
       </main>

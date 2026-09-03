@@ -138,11 +138,6 @@ export const Footer: React.FC<FooterProps> = ({ onSelectSection, onOpenBookingMo
                       Promotions & Deals
                     </button>
                   </li>
-                  <li>
-                    <button onClick={() => onSelectSection('extras-section')} className="hover:text-[#14ABFA] transition-colors text-left cursor-pointer">
-                      Travel Extras & Protection
-                    </button>
-                  </li>
                 </ul>
               </div>
 

@@ -172,20 +172,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onSelectSection, onNavigateToCon
         { label: 'All Tour Deals', key: 'all-tour-deals', group: 'Tour Deals' },
         { label: 'All Military Deals', key: 'all-military-deals', group: 'Military Deals' }
       ]
-    },
-    {
-      id: 'extras',
-      label: 'Extras',
-      sectionId: 'extras-section',
-      subpages: [
-        { label: 'Videos', key: 'videos' },
-        { label: 'Brochures', key: 'brochures' },
-        { label: 'Destination Weddings', key: 'destination-weddings', group: 'Romance Travel' },
-        { label: 'Honeymoon Registry', key: 'honeymoon-registry', group: 'Romance Travel' },
-        { label: 'Shore Excursions', key: 'shore-excursions', group: 'Vacation Extras' },
-        { label: 'Travel Insurance', key: 'travel-insurance', group: 'Vacation Extras' },
-        { label: 'Flights & Car Rentals', key: 'flights-car-rentals', group: 'Vacation Extras' }
-      ]
     }
   ];
 
