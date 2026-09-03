@@ -105,14 +105,14 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onEnter }) => {
               />
             ))}
 
-            <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
+            <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 sm:px-6">
               <img
                 src={CLOUD9_FULL_LOGO}
                 alt="Cloud 9 Travels"
-                className="w-28 sm:w-36 md:w-40 h-auto mb-6 brightness-0 invert drop-shadow-[0_4px_20px_rgba(0,0,0,0.35)] animate-splash-fade-in"
+                className="w-16 sm:w-36 md:w-40 h-auto mb-2 sm:mb-6 brightness-0 invert drop-shadow-[0_4px_20px_rgba(0,0,0,0.35)] animate-splash-fade-in"
               />
               <span
-                className="font-signature text-xl sm:text-3xl md:text-4xl text-white select-none animate-splash-fade-in"
+                className="font-signature text-sm leading-tight sm:text-3xl md:text-4xl sm:leading-normal text-white select-none animate-splash-fade-in"
                 style={{ animationDelay: '0.15s' }}
               >
                 Let yourself be transported
@@ -123,7 +123,7 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onEnter }) => {
                   e.stopPropagation();
                   handleEnter();
                 }}
-                className="mt-6 sm:mt-12 pb-1 text-xs font-black uppercase tracking-widest text-white hover:text-[#14ABFA] border-b-2 border-white/70 hover:border-[#14ABFA] transition-colors cursor-pointer animate-splash-fade-in"
+                className="mt-2 sm:mt-12 pb-1 text-[9px] sm:text-xs font-black uppercase tracking-widest text-white hover:text-[#14ABFA] border-b-2 border-white/70 hover:border-[#14ABFA] transition-colors cursor-pointer animate-splash-fade-in"
                 style={{ animationDelay: '0.3s' }}
               >
                 Discover Cloud 9
