@@ -23,40 +23,8 @@ export const Footer: React.FC<FooterProps> = ({ onSelectSection, onOpenBookingMo
 
   return (
     <footer id="main-footer" className="w-full bg-[#0E1035] text-[#0E1035] overflow-hidden">
-      {/* 1. Full-Width Continuous Dark Brand Section with Text Overlap */}
-      <div className="w-full bg-[#0E1035] relative select-none overflow-hidden">
-        {/* Subtle Ambient Cosmic Glow */}
-        <div className="absolute top-0 right-1/4 w-[600px] h-[350px] bg-[#14ABFA]/10 blur-[120px] pointer-events-none" />
-
-        {/* Master SVG Typography Vector Banner */}
-        <div className="w-full relative z-10 leading-none -mb-1">
-          <svg
-            viewBox="0 0 1440 380"
-            className="w-full h-auto block select-none pointer-events-none"
-            preserveAspectRatio="xMidYMax meet"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <rect x="0" y="0" width="1440" height="295" fill="#0E1035" />
-            <rect x="0" y="295" width="1440" height="85" fill="#FFFFFF" />
-
-            <text
-              x="50%"
-              y="330"
-              textAnchor="middle"
-              fill="#FFFFFF"
-              fontWeight="950"
-              fontSize="340"
-              letterSpacing="-15"
-              fontFamily="'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
-            >
-              cloud9
-            </text>
-          </svg>
-        </div>
-      </div>
-
       {/* 2. Full-Width Clean White Lower Section */}
-      <div className="w-full bg-white -mt-1 pt-10 sm:pt-14 lg:pt-16 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 xl:px-10 relative z-20">
+      <div className="w-full bg-white pt-10 sm:pt-14 lg:pt-16 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 xl:px-10 relative z-20">
         <div className="w-full max-w-[1640px] mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 xl:gap-14 items-start">
             
