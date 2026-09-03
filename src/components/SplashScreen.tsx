@@ -29,18 +29,18 @@ interface CloudPlacement {
 }
 
 const BOTTOM_CLOUDS: CloudPlacement[] = [
-  { src: CLOUD_1, left: '50%', bottom: '-4%', width: '58%', rotate: -1, duration: 9, delay: 0, exitDuration: 1.6, exitDelay: 0.05, exitRise: 150, exitDrift: -2 },
-  { src: CLOUD_7, left: '10%', bottom: '2%', width: '32%', rotate: 4, duration: 8, delay: 0.3, exitDuration: 1.3, exitDelay: 0.15, exitRise: 170, exitDrift: 3 },
-  { src: CLOUD_8, left: '88%', bottom: '0%', width: '28%', rotate: -5, duration: 7.5, delay: 0.6, exitDuration: 1.45, exitDelay: 0.25, exitRise: 160, exitDrift: -3 },
-  { src: CLOUD_3, left: '30%', bottom: '11%', width: '20%', rotate: 3, duration: 8.5, delay: 0.9, exitDuration: 1.2, exitDelay: 0.35, exitRise: 180, exitDrift: 4 },
-  { src: CLOUD_4, left: '70%', bottom: '9%', width: '18%', rotate: -3, duration: 9.5, delay: 0.2, exitDuration: 1.55, exitDelay: 0.1, exitRise: 155, exitDrift: -4 },
-  { src: CLOUD_2, left: '97%', bottom: '-6%', width: '24%', rotate: 5, duration: 10, delay: 0.5, exitDuration: 1.35, exitDelay: 0.3, exitRise: 165, exitDrift: 2 },
-  { src: CLOUD_6, left: '2%', bottom: '-5%', width: '13%', rotate: -6, duration: 7, delay: 0.8, exitDuration: 1.15, exitDelay: 0.4, exitRise: 175, exitDrift: -5 },
-  { src: CLOUD_5, left: '46%', bottom: '17%', width: '9%', rotate: 2, duration: 8, delay: 1.1, exitDuration: 1.25, exitDelay: 0.45, exitRise: 185, exitDrift: 5 },
-  { src: CLOUD_1, left: '20%', bottom: '-8%', width: '34%', rotate: 2, duration: 9.2, delay: 0.5, exitDuration: 1.4, exitDelay: 0.2, exitRise: 158, exitDrift: -6 },
-  { src: CLOUD_7, left: '62%', bottom: '-6%', width: '26%', rotate: -3, duration: 8.3, delay: 0.7, exitDuration: 1.5, exitDelay: 0.12, exitRise: 172, exitDrift: 6 },
-  { src: CLOUD_8, left: '40%', bottom: '5%', width: '20%', rotate: 4, duration: 7.8, delay: 0.15, exitDuration: 1.3, exitDelay: 0.32, exitRise: 168, exitDrift: -3.5 },
-  { src: CLOUD_3, left: '78%', bottom: '8%', width: '18%', rotate: -2, duration: 8.7, delay: 0.95, exitDuration: 1.18, exitDelay: 0.42, exitRise: 178, exitDrift: 3.5 },
+  { src: CLOUD_1, left: '50%', bottom: '-4%', width: '58%', rotate: -1, duration: 9, delay: 0, exitDuration: 1.6, exitDelay: 0.05, exitRise: 100, exitDrift: -2 },
+  { src: CLOUD_7, left: '10%', bottom: '2%', width: '32%', rotate: 4, duration: 8, delay: 0.3, exitDuration: 1.3, exitDelay: 0.15, exitRise: 108, exitDrift: 3 },
+  { src: CLOUD_8, left: '88%', bottom: '0%', width: '28%', rotate: -5, duration: 7.5, delay: 0.6, exitDuration: 1.45, exitDelay: 0.25, exitRise: 104, exitDrift: -3 },
+  { src: CLOUD_3, left: '30%', bottom: '11%', width: '20%', rotate: 3, duration: 8.5, delay: 0.9, exitDuration: 1.2, exitDelay: 0.35, exitRise: 112, exitDrift: 4 },
+  { src: CLOUD_4, left: '70%', bottom: '9%', width: '18%', rotate: -3, duration: 9.5, delay: 0.2, exitDuration: 1.55, exitDelay: 0.1, exitRise: 102, exitDrift: -4 },
+  { src: CLOUD_2, left: '97%', bottom: '-6%', width: '24%', rotate: 5, duration: 10, delay: 0.5, exitDuration: 1.35, exitDelay: 0.3, exitRise: 106, exitDrift: 2 },
+  { src: CLOUD_6, left: '2%', bottom: '-5%', width: '13%', rotate: -6, duration: 7, delay: 0.8, exitDuration: 1.15, exitDelay: 0.4, exitRise: 110, exitDrift: -5 },
+  { src: CLOUD_5, left: '46%', bottom: '17%', width: '9%', rotate: 2, duration: 8, delay: 1.1, exitDuration: 1.25, exitDelay: 0.45, exitRise: 114, exitDrift: 5 },
+  { src: CLOUD_1, left: '20%', bottom: '-8%', width: '34%', rotate: 2, duration: 9.2, delay: 0.5, exitDuration: 1.4, exitDelay: 0.2, exitRise: 103, exitDrift: -6 },
+  { src: CLOUD_7, left: '62%', bottom: '-6%', width: '26%', rotate: -3, duration: 8.3, delay: 0.7, exitDuration: 1.5, exitDelay: 0.12, exitRise: 109, exitDrift: 6 },
+  { src: CLOUD_8, left: '40%', bottom: '5%', width: '20%', rotate: 4, duration: 7.8, delay: 0.15, exitDuration: 1.3, exitDelay: 0.32, exitRise: 107, exitDrift: -3.5 },
+  { src: CLOUD_3, left: '78%', bottom: '8%', width: '18%', rotate: -2, duration: 8.7, delay: 0.95, exitDuration: 1.18, exitDelay: 0.42, exitRise: 111, exitDrift: 3.5 },
 ];
 
 interface SplashScreenProps {
@@ -119,7 +119,10 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onEnter }) => {
               </span>
               <button
                 type="button"
-                onClick={handleEnter}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleEnter();
+                }}
                 className="mt-6 sm:mt-12 pb-1 text-xs font-black uppercase tracking-widest text-white hover:text-[#14ABFA] border-b-2 border-white/70 hover:border-[#14ABFA] transition-colors cursor-pointer animate-splash-fade-in"
                 style={{ animationDelay: '0.3s' }}
               >
@@ -136,7 +139,7 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onEnter }) => {
         <div
           className="absolute inset-x-0 bottom-0 h-[26vh] bg-gradient-to-t from-white via-white/70 to-transparent"
           style={{
-            transform: closing ? 'translateY(-170vh)' : 'translateY(0)',
+            transform: closing ? 'translateY(-115vh)' : 'translateY(0)',
             transition: closing ? 'transform 1.5s ease-in-out 0.1s' : 'none',
           }}
         />
