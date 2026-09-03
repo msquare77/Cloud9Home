@@ -194,7 +194,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onSelectSection, onNavigateToCon
               <img
                 src={CLOUD9_LOGO}
                 alt="Cloud 9 Travels — Naushad and Narmin Kermally"
-                className="w-28 sm:w-36 h-20 object-contain shrink-0"
+                className="h-20 w-auto object-contain shrink-0"
               />
             </button>
             <div className="hidden sm:block w-px h-9 bg-[#0E1035]/15 shrink-0" aria-hidden="true" />

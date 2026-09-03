@@ -31,7 +31,7 @@ export const Footer: React.FC<FooterProps> = ({ onSelectSection, onNavigateToCon
               <img
                 src={CLOUD9_LOGO}
                 alt="Cloud 9 Travels — Narmin and Naushad Kermally"
-                className="h-20 w-40 object-contain object-left sm:h-28 sm:w-56"
+                className="h-20 sm:h-28 w-auto object-contain shrink-0"
               />
               <div className="w-px h-16 bg-[#0E1035]/15 shrink-0" aria-hidden="true" />
               <img
