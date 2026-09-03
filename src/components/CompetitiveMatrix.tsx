@@ -4,22 +4,25 @@ interface CompetitiveMatrixProps {
   onOpenBookingModal: () => void;
 }
 
-const CLOUD9_BENEFITS = [
+const COUPLE_IMAGE = new URL('../../assets/Why Cloud 9/travel-advisors-couple.jpg', import.meta.url).href;
+const NAUSHAD_IMAGE = new URL('../../assets/Why Cloud 9/travel-advisor-naushad.jpg', import.meta.url).href;
+const NARMIN_IMAGE = new URL('../../assets/Why Cloud 9/travel-advisor-narmin.jpg', import.meta.url).href;
+
+const ADVISOR_CARDS = [
   {
-    title: 'Personal Service',
-    description: 'A dedicated advisor who listens, understands your priorities, and plans around you.',
+    image: COUPLE_IMAGE,
+    name: 'Personalised Service, Every Journey',
+    bio: null,
   },
   {
-    title: 'Exceptional Value',
-    description: 'Thoughtful recommendations that balance the right experience with your vacation budget.',
+    image: NAUSHAD_IMAGE,
+    name: 'Naushad Kermally',
+    bio: "Naushad Kermally is a lifelong travel enthusiast and community leader who has called Sugar Land home for nearly 30 years. With deep roots in the local community and a passion for exploring the world, Naushad brings an authoritative, well-traveled perspective to every itinerary Cloud 9 Travel designs. Whether it's a family cruise, a milestone celebration, or a bucket-list adventure, Naushad's firsthand knowledge and attention to detail ensure every trip is planned with care.",
   },
   {
-    title: 'Exclusive Benefits',
-    description: 'Access to special offers, added amenities, and valuable supplier promotions.',
-  },
-  {
-    title: 'Expert Support',
-    description: 'Professional guidance from the first conversation until you return home.',
+    image: NARMIN_IMAGE,
+    name: 'Narmin Kermally',
+    bio: "Narmin Kermally is the driving force behind Cloud 9 Travel, bringing years of hands-on experience across cruises, all-inclusive resorts, and custom vacation planning. As CEO, she's built Cloud 9 into a trusted name for travelers seeking a seamless, personalized experience — pairing industry expertise with a genuine passion for helping clients discover the world. From first-time cruisers to seasoned travelers, Narmin treats every journey as her own.",
   },
 ];
 
@@ -35,24 +38,35 @@ export const CompetitiveMatrix: React.FC<CompetitiveMatrixProps> = () => (
         </h2>
       </div>
 
-      <div className="mt-10 sm:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-7">
-        {CLOUD9_BENEFITS.map(benefit => (
+      <div className="mt-10 sm:mt-14 grid grid-cols-1 lg:grid-cols-3 gap-7 lg:gap-8 items-stretch">
+        {ADVISOR_CARDS.map((card) => (
           <article
-            key={benefit.title}
-            className="text-center flex flex-col items-center transition-transform duration-400 hover:-translate-y-1.5"
+            key={card.name}
+            className="group flex flex-col overflow-hidden bg-white shadow-[0_18px_55px_rgba(14,16,53,0.08)] transition-transform duration-400 hover:-translate-y-1.5"
           >
-            <div className="flex h-40 w-full max-w-[270px] items-center justify-center border-2 border-dashed border-[#0E1035]/20 bg-[#0E1035]/5 text-[#0E1035]/30">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-10 w-10">
-                <rect x="3" y="3" width="18" height="18" rx="2" />
-                <circle cx="8.5" cy="8.5" r="1.5" />
-                <path d="M21 15l-5-5L5 21" />
-              </svg>
+            <div className="relative aspect-[1080/771] overflow-hidden bg-[#0E1035]/5">
+              <img
+                src={card.image}
+                alt={card.name}
+                className="absolute inset-0 h-full w-full object-contain transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                loading="lazy"
+              />
             </div>
 
-            <h3 className="mt-5 text-base sm:text-lg font-extrabold text-[#0E1035]">{benefit.title}</h3>
-            <p className="mx-auto mt-2 max-w-64 px-3 text-xs sm:text-sm font-normal leading-relaxed text-[#0E1035]/66">
-              {benefit.description}
-            </p>
+            <div className="flex flex-1 flex-col p-6 sm:p-7">
+              {card.bio ? (
+                <>
+                  <h3 className="text-xl sm:text-2xl font-extrabold text-[#0E1035]">{card.name}</h3>
+                  <p className="mt-3 text-sm font-normal leading-relaxed text-[#0E1035]/70">
+                    {card.bio}
+                  </p>
+                </>
+              ) : (
+                <h3 className="my-auto text-2xl sm:text-3xl font-extrabold leading-snug text-[#0E1035]">
+                  {card.name}
+                </h3>
+              )}
+            </div>
           </article>
         ))}
       </div>
