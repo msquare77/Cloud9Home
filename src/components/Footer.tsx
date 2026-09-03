@@ -1,233 +1,101 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Phone, Mail, MapPin } from 'lucide-react';
 
 const CLOUD9_LOGO = new URL('../../assets/Cloud 9 Logo.png', import.meta.url).href;
 const DREAM_VACATIONS_LOGO = new URL('../../assets/dream-vacations-logo-color.svg', import.meta.url).href;
 
 interface FooterProps {
   onSelectSection: (sectionId: string) => void;
-  onOpenBookingModal: () => void;
+  onNavigateToContact: () => void;
+  onNavigateToFaq: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onSelectSection, onOpenBookingModal }) => {
-  const [email, setEmail] = useState('');
-  const [subscribed, setSubscribed] = useState(false);
+const FOOTER_NAV_LINKS = [
+  { label: 'Cruises', sectionId: 'cruises-section' },
+  { label: 'Resorts', sectionId: 'resorts-section' },
+  { label: 'Tours', sectionId: 'tours-section' },
+  { label: 'Luxury', sectionId: 'luxury-section' },
+  { label: 'Destinations', sectionId: 'destinations-section' },
+  { label: 'Deals', sectionId: 'deals-section' }
+];
 
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email.trim()) {
-      setSubscribed(true);
-      setTimeout(() => setSubscribed(false), 4000);
-      setEmail('');
-    }
-  };
-
+export const Footer: React.FC<FooterProps> = ({ onSelectSection, onNavigateToContact, onNavigateToFaq }) => {
   return (
     <footer id="main-footer" className="w-full bg-[#0E1035] text-[#0E1035] overflow-hidden">
-      {/* 2. Full-Width Clean White Lower Section */}
-      <div className="w-full bg-white pt-10 sm:pt-14 lg:pt-16 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 xl:px-10 relative z-20">
+      <div className="w-full bg-white px-4 sm:px-6 lg:px-8 xl:px-10 py-12 sm:py-16">
         <div className="w-full max-w-[1640px] mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 xl:gap-14 items-start">
-            
-            {/* Left Narrative & VIP Travel Club Column */}
-            <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
-              <div>
-                <div className="flex items-center gap-4 mb-4">
-                  <img
-                    src={CLOUD9_LOGO}
-                    alt="Cloud 9 Travels — Narmin and Naushad Kermally"
-                    className="h-24 w-48 object-contain object-left sm:h-28 sm:w-56"
-                  />
-                  <div className="w-px h-14 bg-[#0E1035]/15 shrink-0" aria-hidden="true" />
-                  <img
-                    src={DREAM_VACATIONS_LOGO}
-                    alt="Dream Vacations — Start Here"
-                    className="h-10 sm:h-12 w-auto object-contain shrink-0"
-                  />
-                </div>
-                <span className="text-[11px] font-black uppercase tracking-widest text-[#14ABFA] block mb-1">
-                  Cloud 9 Travels • Dream Vacations Franchise
-                </span>
-                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0E1035] tracking-tight leading-tight mb-2.5">
-                  Narmin & Naushad Kermally.<br />
-                  Your Personal Travel Specialists.
-                </h3>
-                <p className="text-xs sm:text-sm text-[#0E1035]/65 font-medium leading-relaxed max-w-sm">
-                  Full-service travel planning for ocean cruises, river voyages, all-inclusive luxury resorts, guided world tours, and Disney getaways. 100% complimentary service with exclusive bonus amenities.
-                </p>
-              </div>
 
-              {/* VIP Travel Club Newsletter */}
-              <div className="space-y-2.5 pt-2">
-                <label htmlFor="journal-email" className="block text-xs sm:text-sm font-bold text-[#0E1035]">
-                  Join the Cloud 9 VIP Travel Club
-                </label>
-                <form onSubmit={handleSubscribe} className="flex items-center max-w-sm gap-2">
-                  <input
-                    id="journal-email"
-                    type="email"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your email address"
-                    className="flex-1 bg-[#EAEBED] text-[#0E1035] placeholder-[#0E1035]/45 text-xs sm:text-sm px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#14ABFA] font-medium"
-                  />
-                  <button
-                    type="submit"
-                    className="px-4 py-3 text-xs font-black uppercase tracking-wider text-[#0E1035] hover:text-[#14ABFA] border-b-2 border-[#14ABFA] transition-colors cursor-pointer shrink-0"
-                  >
-                    Subscribe
-                  </button>
-                </form>
-
-                {subscribed && (
-                  <p className="text-xs text-[#14ABFA] font-bold pt-1">
-                    ✓ Welcome to the Cloud 9 VIP Travel Club! Exclusive deals will arrive in your inbox.
-                  </p>
-                )}
-              </div>
-
-              {/* Contact Info Row */}
-              <div className="space-y-1.5 text-xs text-[#0E1035]/80 pt-1">
-                <div>
-                  <a href="tel:17135607016" className="font-bold hover:text-[#14ABFA] underline">
-                    Phone: (713) 560-7016
-                  </a>
-                </div>
-                <div>
-                  <a href="mailto:nkermally@dreamvacations.com" className="font-semibold hover:text-[#14ABFA] underline">
-                    Email: nkermally@dreamvacations.com
-                  </a>
-                </div>
-                <div>
-                  <span>Location: Sugar Land, TX 77479</span>
-                </div>
-              </div>
+          {/* Top row: brand lockup + main navigation */}
+          <div className="flex flex-col gap-8 pb-10 border-b border-[#0E1035]/10 lg:flex-row lg:items-center lg:justify-between">
+            <div className="flex items-center gap-4">
+              <img
+                src={CLOUD9_LOGO}
+                alt="Cloud 9 Travels — Narmin and Naushad Kermally"
+                className="h-16 w-32 object-contain object-left sm:h-20 sm:w-40"
+              />
+              <div className="w-px h-12 bg-[#0E1035]/15 shrink-0" aria-hidden="true" />
+              <img
+                src={DREAM_VACATIONS_LOGO}
+                alt="Dream Vacations — Start Here"
+                className="h-9 sm:h-10 w-auto object-contain shrink-0"
+              />
             </div>
 
-            {/* Right Matrix: Vacation Experiences, Destinations, Agency Pillars & Certified Seal */}
-            <div className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-4 gap-8 items-start">
-              
-              {/* Vacation Types Column */}
-              <div>
-                <h4 className="text-xs sm:text-sm font-bold text-[#0E1035] mb-4 tracking-tight">
-                  Vacation Portfolios
-                </h4>
-                <ul className="space-y-2.5 text-xs text-[#0E1035]/70 font-medium">
-                  <li>
-                    <button onClick={() => onSelectSection('cruises-section')} className="hover:text-[#14ABFA] transition-colors text-left cursor-pointer">
-                      Cruises & Ocean Voyages
-                    </button>
-                  </li>
-                  <li>
-                    <button onClick={() => onSelectSection('resorts-section')} className="hover:text-[#14ABFA] transition-colors text-left cursor-pointer">
-                      All-Inclusive Resorts
-                    </button>
-                  </li>
-                  <li>
-                    <button onClick={() => onSelectSection('tours-section')} className="hover:text-[#14ABFA] transition-colors text-left cursor-pointer">
-                      Guided Tours & Safaris
-                    </button>
-                  </li>
-                  <li>
-                    <button onClick={() => onSelectSection('luxury-section')} className="hover:text-[#14ABFA] transition-colors text-left cursor-pointer">
-                      Ultra-Luxury & Yachts
-                    </button>
-                  </li>
-                  <li>
-                    <button onClick={() => onSelectSection('deals-section')} className="hover:text-[#14ABFA] transition-colors text-left cursor-pointer">
-                      Promotions & Deals
-                    </button>
-                  </li>
-                </ul>
-              </div>
-
-              {/* Destinations Column */}
-              <div>
-                <h4 className="text-xs sm:text-sm font-bold text-[#0E1035] mb-4 tracking-tight">
-                  Top Destinations
-                </h4>
-                <ul className="space-y-2.5 text-xs text-[#0E1035]/70 font-medium">
-                  <li>
-                    <button onClick={() => onSelectSection('destinations-section')} className="hover:text-[#14ABFA] transition-colors text-left cursor-pointer">
-                      Caribbean & Bahamas
-                    </button>
-                  </li>
-                  <li>
-                    <button onClick={() => onSelectSection('destinations-section')} className="hover:text-[#14ABFA] transition-colors text-left cursor-pointer">
-                      Alaska Glaciers
-                    </button>
-                  </li>
-                  <li>
-                    <button onClick={() => onSelectSection('destinations-section')} className="hover:text-[#14ABFA] transition-colors text-left cursor-pointer">
-                      Mediterranean & Europe
-                    </button>
-                  </li>
-                  <li>
-                    <button onClick={() => onSelectSection('destinations-section')} className="hover:text-[#14ABFA] transition-colors text-left cursor-pointer">
-                      Mexico & Riviera Maya
-                    </button>
-                  </li>
-                  <li>
-                    <button onClick={() => onSelectSection('destinations-section')} className="hover:text-[#14ABFA] transition-colors text-left cursor-pointer">
-                      African Wildlife Safaris
-                    </button>
-                  </li>
-                  <li>
-                    <button onClick={() => onSelectSection('destinations-section')} className="hover:text-[#14ABFA] transition-colors text-left cursor-pointer">
-                      Disney & Universal Parks
-                    </button>
-                  </li>
-                </ul>
-              </div>
-
-              {/* Why Us / Guarantees Column */}
-              <div>
-                <h4 className="text-xs sm:text-sm font-bold text-[#0E1035] mb-4 tracking-tight">
-                  Our Guarantees
-                </h4>
-                <ul className="space-y-2.5 text-xs text-[#0E1035]/70 font-medium">
-                  <li>
-                    <span className="block text-[#0E1035] font-semibold">Price Guarantee</span>
-                  </li>
-                  <li>
-                    <span className="block text-[#0E1035] font-semibold">Dedicated Travel Advisor</span>
-                  </li>
-                  <li>
-                    <span className="block text-[#0E1035] font-semibold">Current Vacation Deals</span>
-                  </li>
-                  <li>
-                    <span className="block text-[#0E1035] font-semibold">Price Drop Monitoring</span>
-                  </li>
-                  <li>
-                    <span className="block text-[#0E1035] font-semibold">Dedicated Concierge</span>
-                  </li>
-                </ul>
-              </div>
-
-              {/* Dream Vacations Certified Franchise Stamp */}
-              <div className="flex flex-col items-center sm:items-end justify-start">
-                <div 
-                  onClick={onOpenBookingModal}
-                  className="bg-[#F1F6FD] p-4 text-center cursor-pointer hover:opacity-80 transition-opacity"
-                  title="Dream Vacations Certified Franchise"
+            <nav aria-label="Footer navigation" className="flex flex-wrap items-center gap-x-7 gap-y-3">
+              {FOOTER_NAV_LINKS.map((link) => (
+                <button
+                  key={link.sectionId}
+                  onClick={() => onSelectSection(link.sectionId)}
+                  className="text-sm font-bold uppercase tracking-wide text-[#0E1035] hover:text-[#14ABFA] transition-colors cursor-pointer"
                 >
-                  <span className="text-[9px] font-black uppercase tracking-wider text-[#0E1035] block mb-1">
-                    DREAM VACATIONS
-                  </span>
-                  <div className="text-xs font-black text-[#14ABFA] mb-1">
-                    CERTIFIED FRANCHISE
-                  </div>
-                  <span className="text-[8px] font-bold uppercase tracking-wider text-[#0E1035]/60 block">
-                    CLOUD 9 TRAVELS, LLC
-                  </span>
-                </div>
-              </div>
+                  {link.label}
+                </button>
+              ))}
+              <button
+                onClick={onNavigateToFaq}
+                className="text-sm font-bold uppercase tracking-wide text-[#0E1035] hover:text-[#14ABFA] transition-colors cursor-pointer"
+              >
+                FAQs
+              </button>
+              <button
+                onClick={onNavigateToContact}
+                className="text-sm font-bold uppercase tracking-wide text-white bg-[#0E1035] hover:bg-[#14ABFA] hover:text-[#0E1035] transition-colors cursor-pointer px-5 py-2.5"
+              >
+                Contact Us
+              </button>
+            </nav>
+          </div>
 
+          {/* Middle: headline + readable contact details */}
+          <div className="flex flex-col gap-8 py-10 lg:flex-row lg:items-center lg:justify-between">
+            <div>
+              <span className="text-[11px] font-black uppercase tracking-widest text-[#14ABFA] block mb-1">
+                Cloud 9 Travels • Dream Vacations Franchise
+              </span>
+              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0E1035] tracking-tight leading-tight">
+                Narmin & Naushad Kermally.<br />
+                Your Personal Travel Specialists.
+              </h3>
+            </div>
+
+            <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap lg:flex-col xl:flex-row">
+              <a href="tel:17135607016" className="flex items-center gap-3 text-base sm:text-lg font-bold text-[#0E1035] hover:text-[#14ABFA] transition-colors">
+                <Phone className="w-5 h-5 text-[#14ABFA] shrink-0" />
+                (713) 560-7016
+              </a>
+              <a href="mailto:nkermally@dreamvacations.com" className="flex items-center gap-3 text-base sm:text-lg font-bold text-[#0E1035] hover:text-[#14ABFA] transition-colors">
+                <Mail className="w-5 h-5 text-[#14ABFA] shrink-0" />
+                nkermally@dreamvacations.com
+              </a>
+              <span className="flex items-center gap-3 text-base sm:text-lg font-bold text-[#0E1035]">
+                <MapPin className="w-5 h-5 text-[#14ABFA] shrink-0" />
+                Sugar Land, TX 77479
+              </span>
             </div>
           </div>
 
           {/* Bottom Legal & Franchise Disclosure Line */}
-          <div className="pt-12 sm:pt-16 mt-8 text-xs text-[#0E1035]/60 font-medium space-y-2">
+          <div className="pt-8 border-t border-[#0E1035]/10 text-xs text-[#0E1035]/60 font-medium space-y-2">
             <p>
               © 2026 Cloud 9 Travels, LLC. Independently Owned & Operated Franchise of Dream Vacations / World Travel Holdings. Narmin & Naushad Kermally, Franchise Owners.
             </p>

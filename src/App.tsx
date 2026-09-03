@@ -250,7 +250,8 @@ export default function App() {
       {/* 22. Comprehensive Footer with Legal & Contact */}
       <Footer
         onSelectSection={handleScrollToSection}
-        onOpenBookingModal={() => handleOpenBookingModal()}
+        onNavigateToContact={navigateToContact}
+        onNavigateToFaq={navigateToFaq}
       />
 
       {/* Sticky WhatsApp Contact Button */}
