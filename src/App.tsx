@@ -148,6 +148,13 @@ export default function App() {
         {/* 3.5. VISUAL JOURNEYS GALLERY */}
         <VisualJourneysGallery onNavigateToSection={handleScrollToSection} />
 
+        {/* 13. EXCLUSIVE PROMOTIONS & LIMITED DEALS */}
+        <DealsSection
+          onOpenBookingModal={handleOpenBookingModal}
+          initialSubpage={activeDealSubpage}
+          key={`deals-${activeDealSubpage}`}
+        />
+
         {/* 4. CRUISES AND EXPEDITIONS */}
         <CruisesSection
           deals={CRUISE_DEALS}
@@ -193,13 +200,6 @@ export default function App() {
           onOpenBookingModal={handleOpenBookingModal}
           initialSubpage={activeDestinationSubpage}
           key={`destinations-${activeDestinationSubpage}`}
-        />
-
-        {/* 13. EXCLUSIVE PROMOTIONS & LIMITED DEALS */}
-        <DealsSection
-          onOpenBookingModal={handleOpenBookingModal}
-          initialSubpage={activeDealSubpage}
-          key={`deals-${activeDealSubpage}`}
         />
 
         {/* 14. Instant Stateroom Quote & Fare Estimator */}
