@@ -9,7 +9,7 @@ const CATEGORY_ITEMS: (GalleryItem & { categoryId: string })[] = [
   {
     categoryId: 'all',
     text: 'Safaris',
-    image: 'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=1200&q=80',
+    image: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=1200&q=80',
   },
   {
     categoryId: 'cruises',

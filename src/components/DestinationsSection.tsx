@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { ViewMoreToggle } from './ViewMoreToggle';
 
 interface DestinationsSectionProps {
   onSelectDestination: (destinationRegion: string) => void;
@@ -25,130 +24,11 @@ export const DESTINATIONS: DestinationListing[] = [
     accent: '#E8A73D'
   },
   {
-    id: 'alaska',
-    name: 'Alaska',
-    description: 'Glacier-carved coastlines, quiet fjords and untamed wilderness.',
-    imageUrl: 'https://images.unsplash.com/photo-1461250281059-4f83443edbdc?auto=format&fit=crop&w=1400&q=86',
-    accent: '#14ABFA'
-  },
-  {
-    id: 'antarctica',
-    name: 'Antarctica',
-    description: 'A rare polar world of ice, wildlife and extraordinary silence.',
-    imageUrl: 'https://images.unsplash.com/photo-1517783999520-f068d7431a60?auto=format&fit=crop&w=1400&q=86',
-    accent: '#2FE0C0'
-  },
-  {
-    id: 'asia',
-    name: 'Asia',
-    description: 'Ancient traditions, electric cities and remarkable cuisine.',
-    imageUrl: 'https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=1200&q=84',
-    accent: '#4136EA'
-  },
-  {
-    id: 'australia-new-zealand',
-    name: 'Australia & New Zealand',
-    description: 'Reef, rainforest, dramatic peaks and spirited coastal cities.',
-    imageUrl: 'https://images.unsplash.com/photo-1469521669194-babb45599def?auto=format&fit=crop&w=1200&q=84',
-    accent: '#2FBE7A'
-  },
-  {
-    id: 'bermuda',
-    name: 'Bermuda',
-    description: 'Pink-sand shores, pastel harbors and easy island elegance.',
-    imageUrl: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=84',
-    accent: '#E8A73D'
-  },
-  {
     id: 'caribbean',
     name: 'Caribbean',
     description: 'Turquoise water, warm island rhythms and sunlit escapes.',
-    imageUrl: 'https://images.unsplash.com/photo-1548574505-5e239809ee19?auto=format&fit=crop&w=1200&q=84',
+    imageUrl: 'https://images.unsplash.com/photo-1590523278191-995cbcda646b?auto=format&fit=crop&w=1600&q=86',
     accent: '#14ABFA'
-  },
-  {
-    id: 'central-america',
-    name: 'Central America',
-    description: 'Rainforests, volcanic horizons and vivid local culture.',
-    imageUrl: 'https://images.unsplash.com/photo-1518259102261-b40117eabbc9?auto=format&fit=crop&w=1200&q=84',
-    accent: '#2FBE7A'
-  },
-  {
-    id: 'dubai-india',
-    name: 'Dubai & India',
-    description: 'Modern spectacle, royal heritage and centuries of artistry.',
-    imageUrl: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=84',
-    accent: '#E8A73D'
-  },
-  {
-    id: 'europe',
-    name: 'Europe',
-    description: 'Storied capitals, celebrated food and effortless rail journeys.',
-    imageUrl: 'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=1200&q=84',
-    accent: '#4136EA'
-  },
-  {
-    id: 'galapagos',
-    name: 'Galápagos',
-    description: 'Otherworldly islands shaped by nature and fearless wildlife.',
-    imageUrl: 'https://images.unsplash.com/photo-1544550285-f813152fb2fd?auto=format&fit=crop&w=1200&q=84',
-    accent: '#2FE0C0'
-  },
-  {
-    id: 'hawaii',
-    name: 'Hawaii',
-    description: 'Volcanic beauty, deep-blue Pacific water and island hospitality.',
-    imageUrl: 'https://images.unsplash.com/photo-1505852679233-d9fd70aff56d?auto=format&fit=crop&w=1200&q=84',
-    accent: '#2FBE7A'
-  },
-  {
-    id: 'iceland',
-    name: 'Iceland',
-    description: 'Waterfalls, geothermal landscapes and wide-open northern skies.',
-    imageUrl: 'https://images.unsplash.com/photo-1504829857797-ddff29c27927?auto=format&fit=crop&w=1200&q=84',
-    accent: '#14ABFA'
-  },
-  {
-    id: 'mediterranean',
-    name: 'Mediterranean',
-    description: 'Sun-washed villages, ancient ports and long coastal lunches.',
-    imageUrl: 'https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=84',
-    accent: '#E8A73D'
-  },
-  {
-    id: 'mexico',
-    name: 'Mexico',
-    description: 'Caribbean beaches, expressive cuisine and enduring heritage.',
-    imageUrl: 'https://images.unsplash.com/photo-1664205543898-829ef8baa7ad?auto=format&fit=crop&w=1200&q=84',
-    accent: '#2FE0C0'
-  },
-  {
-    id: 'south-america',
-    name: 'South America',
-    description: 'Andean peaks, bold cities and journeys rich in character.',
-    imageUrl: 'https://images.unsplash.com/photo-1526392060635-9d6019884377?auto=format&fit=crop&w=1200&q=84',
-    accent: '#4136EA'
-  },
-  {
-    id: 'south-pacific',
-    name: 'South Pacific',
-    description: 'Remote lagoons, lush islands and beautifully unhurried days.',
-    imageUrl: 'https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=1200&q=84',
-    accent: '#14ABFA'
-  },
-  {
-    id: 'united-kingdom-ireland',
-    name: 'United Kingdom & Ireland',
-    description: 'Historic cities, green countryside and coastlines full of story.',
-    imageUrl: 'https://images.unsplash.com/photo-1486299267070-83823f5448dd?auto=format&fit=crop&w=1200&q=84',
-    accent: '#2FBE7A'
-  },
-  {
-    id: 'united-states',
-    name: 'United States',
-    description: 'Iconic cities, open roads and extraordinary national landscapes.',
-    imageUrl: 'https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1200&q=84',
-    accent: '#E8A73D'
   }
 ];
 
@@ -215,7 +95,6 @@ export const DestinationsSection: React.FC<DestinationsSectionProps> = ({
   const initialDestination = DESTINATIONS.find((destination) => destination.id === initialSubpage);
   const [searchTerm, setSearchTerm] = useState(initialDestination?.name || '');
   const [searchOpen, setSearchOpen] = useState(false);
-  const [showAll, setShowAll] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -238,8 +117,6 @@ export const DestinationsSection: React.FC<DestinationsSectionProps> = ({
   }, [searchTerm]);
 
   const isSearching = searchTerm.trim().length > 0;
-  const featuredDestinations = DESTINATIONS.slice(0, 3);
-  const remainingDestinations = DESTINATIONS.slice(3);
 
   return (
     <section id="destinations-section" className="bg-[#F1F6FD] py-20 sm:py-28">
@@ -253,7 +130,7 @@ export const DestinationsSection: React.FC<DestinationsSectionProps> = ({
               DESTINATIONS WORTH THE JOURNEY
             </h2>
             <p className="mt-4 max-w-2xl text-sm font-normal leading-relaxed text-[#0E1035]/70 sm:text-base">
-              Explore nineteen remarkable places, from polar horizons to sunlit islands. Choose a destination and we will help shape the journey around you.
+              Two spotlight destinations to start your next journey. Choose one and we will help shape the trip around you.
             </p>
           </div>
 
@@ -265,7 +142,6 @@ export const DestinationsSection: React.FC<DestinationsSectionProps> = ({
                 onChange={(event) => {
                   setSearchTerm(event.target.value);
                   setSearchOpen(true);
-                  setShowAll(false);
                 }}
                 onFocus={() => setSearchOpen(true)}
                 placeholder="Search all destinations"
@@ -292,7 +168,6 @@ export const DestinationsSection: React.FC<DestinationsSectionProps> = ({
                     onClick={() => {
                       setSearchTerm(destination.name);
                       setSearchOpen(false);
-                      setShowAll(false);
                     }}
                     className="block w-full px-5 py-3 text-left text-sm font-medium text-[#0E1035] transition-colors hover:bg-[#F1F6FD] hover:text-[#14ABFA] cursor-pointer"
                   >
@@ -332,54 +207,20 @@ export const DestinationsSection: React.FC<DestinationsSectionProps> = ({
               </div>
             )
           ) : (
-            <>
-              <div className="grid gap-5 lg:h-[680px] lg:grid-cols-12 lg:grid-rows-2">
-                <div className="lg:col-span-7 lg:row-span-2">
-                  <DestinationTile
-                    destination={featuredDestinations[0]}
-                    index={0}
-                    featured
-                    onOpenBookingModal={onOpenBookingModal}
-                  />
-                </div>
-                <div className="lg:col-span-5">
-                  <DestinationTile
-                    destination={featuredDestinations[1]}
-                    index={1}
-                    featured
-                    onOpenBookingModal={onOpenBookingModal}
-                  />
-                </div>
-                <div className="lg:col-span-5">
-                  <DestinationTile
-                    destination={featuredDestinations[2]}
-                    index={2}
-                    featured
-                    onOpenBookingModal={onOpenBookingModal}
-                  />
-                </div>
-              </div>
-
-              {showAll && (
-                <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                  {remainingDestinations.map((destination, index) => (
-                    <DestinationTile
-                      key={destination.id}
-                      destination={destination}
-                      index={index + 3}
-                      onOpenBookingModal={onOpenBookingModal}
-                    />
-                  ))}
-                </div>
-              )}
-
-              <ViewMoreToggle
-                expanded={showAll}
-                total={DESTINATIONS.length}
-                label="Destinations"
-                onToggle={() => setShowAll((expanded) => !expanded)}
+            <div className="grid gap-5 sm:grid-cols-2 lg:h-[560px]">
+              <DestinationTile
+                destination={DESTINATIONS[0]}
+                index={0}
+                featured
+                onOpenBookingModal={onOpenBookingModal}
               />
-            </>
+              <DestinationTile
+                destination={DESTINATIONS[1]}
+                index={1}
+                featured
+                onOpenBookingModal={onOpenBookingModal}
+              />
+            </div>
           )}
         </div>
       </div>
