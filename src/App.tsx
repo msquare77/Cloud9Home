@@ -20,7 +20,6 @@ import { FamilyTravelTips } from './components/FamilyTravelTips';
 import { VoyagerTestimonials } from './components/VoyagerTestimonials';
 import { FaqSection } from './components/FaqSection';
 import { ConversionCtaBanner } from './components/ConversionCtaBanner';
-import { PayNowSection } from './components/PayNowSection';
 import { Footer } from './components/Footer';
 import { WhatsAppButton } from './components/WhatsAppButton';
 import { BookingModal } from './components/BookingModal';
@@ -47,7 +46,6 @@ export default function App() {
   const [activeDestinationSubpage, setActiveDestinationSubpage] = useState<string>('all');
   const [activeDealSubpage, setActiveDealSubpage] = useState<string>('all');
   const [activeExtraSubpage, setActiveExtraSubpage] = useState<string>('all');
-  const [activePaySubpage, setActivePaySubpage] = useState<string>('payment');
   const [activeGalleryCategory, setActiveGalleryCategory] = useState<string>('all');
 
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
@@ -70,7 +68,6 @@ export default function App() {
       if (sectionId === 'destinations-section') setActiveDestinationSubpage(subpageKey);
       if (sectionId === 'deals-section') setActiveDealSubpage(subpageKey);
       if (sectionId === 'extras-section') setActiveExtraSubpage(subpageKey);
-      if (sectionId === 'pay-now-section') setActivePaySubpage(subpageKey);
       if (sectionId === 'gallery-section') setActiveGalleryCategory(subpageKey);
     }
 
@@ -230,12 +227,6 @@ export default function App() {
         {/* 19. Frequently Asked Questions Accordion */}
         <FaqSection onOpenBookingModal={() => handleOpenBookingModal()} />
 
-        {/* 20. PAY NOW & CLIENT PORTAL */}
-        <PayNowSection
-          onOpenBookingModal={handleOpenBookingModal}
-          initialSubpage={activePaySubpage}
-          key={`pay-${activePaySubpage}`}
-        />
 
         {/* 21. Bespoke Voyage CTA & Newsletter */}
         <ConversionCtaBanner onOpenBookingModal={() => handleOpenBookingModal()} />

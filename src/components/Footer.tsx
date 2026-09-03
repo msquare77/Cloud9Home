@@ -175,11 +175,6 @@ export const Footer: React.FC<FooterProps> = ({ onSelectSection, onOpenBookingMo
                       Travel Extras & Protection
                     </button>
                   </li>
-                  <li>
-                    <button onClick={() => onSelectSection('pay-now-section')} className="hover:text-[#14ABFA] transition-colors text-left cursor-pointer font-bold text-[#0E1035]">
-                      Pay Now / Client Portal
-                    </button>
-                  </li>
                 </ul>
               </div>
 

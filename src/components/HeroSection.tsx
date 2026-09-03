@@ -1,6 +1,5 @@
 import React from 'react';
 import { CruiseFilterState } from '../types';
-import { VacationMatcherBox } from './VacationMatcherBox';
 
 const HERO_CRUISE_IMAGE = new URL('../../assets/magnific/hero-cruise.png', import.meta.url).href;
 const GIVEAWAY_IMAGE = new URL('../../assets/magnific/resort-3.jpg', import.meta.url).href;
@@ -118,8 +117,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             </div>
           </div>
         </div>
-
-        <VacationMatcherBox onNavigateToMatch={onNavigateToMatch} />
 
         {/* Legacy search controls retained for state compatibility; explorer now renders below. */}
         <div className="hidden bg-white shadow-xs p-6 sm:p-9 mb-14">

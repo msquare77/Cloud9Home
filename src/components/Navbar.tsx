@@ -273,23 +273,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBookingModal, onSelectSect
               );
             })}
 
-            {/* Pay Now Main Navigation Item */}
-            <button
-              onClick={() => handleNavClick('pay-now-section')}
-              className="text-[#0E1035] hover:text-[#14ABFA] font-black py-2 focus:outline-none cursor-pointer border-b-2 border-transparent hover:border-[#14ABFA]"
-            >
-              <span>Pay Now</span>
-            </button>
           </div>
 
           {/* Call to Action Buttons */}
           <div className="hidden sm:flex items-center gap-3">
-            <button
-              onClick={() => handleNavClick('pay-now-section', 'lookup')}
-              className="px-3.5 py-2 text-xs font-bold uppercase tracking-normal text-[#0E1035] transition-colors focus:outline-none cursor-pointer border-b-2 border-transparent hover:border-[#0E1035]"
-            >
-              Check Booking
-            </button>
             <button
               onClick={() => onOpenBookingModal()}
               className="text-[#0E1035] px-3.5 py-2 text-xs font-black hover:text-[#14ABFA] transition-colors uppercase tracking-normal cursor-pointer focus:outline-none border-b-2 border-transparent hover:border-[#14ABFA]"
@@ -300,12 +287,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBookingModal, onSelectSect
 
           {/* Mobile Menu Button */}
           <div className="xl:hidden flex items-center gap-2">
-            <button
-              onClick={() => handleNavClick('pay-now-section')}
-              className="sm:hidden px-3 py-1.5 text-xs font-black uppercase tracking-normal text-[#0E1035] border-b-2 border-[#0E1035]"
-            >
-              <span>Pay</span>
-            </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="p-2 text-[#0E1035] hover:bg-[#0E1035]/5 focus:outline-none cursor-pointer"
@@ -361,15 +342,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBookingModal, onSelectSect
                   </div>
                 );
               })}
-
-              <div className="pt-2">
-                <button
-                  onClick={() => handleNavClick('pay-now-section')}
-                  className="w-full py-2.5 px-3 text-left font-black text-xs uppercase tracking-wider text-[#0E1035] bg-[#F1F6FD] flex items-center justify-between"
-                >
-                  <span>Pay Now / Client Portal</span>
-                </button>
-              </div>
             </div>
 
             <div className="pt-3 border-t border-[#0E1035]/10 flex flex-col gap-2">

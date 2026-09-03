@@ -8,22 +8,18 @@ const CLOUD9_BENEFITS = [
   {
     title: 'Personal Service',
     description: 'A dedicated advisor who listens, understands your priorities, and plans around you.',
-    image: new URL('../../assets/Why Cloud 9/Badge _3.webp', import.meta.url).href,
   },
   {
     title: 'Exceptional Value',
     description: 'Thoughtful recommendations that balance the right experience with your vacation budget.',
-    image: new URL('../../assets/Why Cloud 9/Badge .webp', import.meta.url).href,
   },
   {
     title: 'Exclusive Benefits',
     description: 'Access to special offers, added amenities, and valuable supplier promotions.',
-    image: new URL('../../assets/Why Cloud 9/Badge _2.webp', import.meta.url).href,
   },
   {
     title: 'Expert Support',
     description: 'Professional guidance from the first conversation until you return home.',
-    image: new URL('../../assets/Why Cloud 9/Badge _1.webp', import.meta.url).href,
   },
 ];
 
@@ -45,15 +41,16 @@ export const CompetitiveMatrix: React.FC<CompetitiveMatrixProps> = () => (
             key={benefit.title}
             className="text-center flex flex-col items-center transition-transform duration-400 hover:-translate-y-1.5"
           >
-            <img
-              src={benefit.image}
-              alt={`${benefit.title} badge`}
-              className="h-auto w-full max-w-[270px] object-contain"
-              loading="lazy"
-            />
+            <div className="flex h-40 w-full max-w-[270px] items-center justify-center border-2 border-dashed border-[#0E1035]/20 bg-[#0E1035]/5 text-[#0E1035]/30">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-10 w-10">
+                <rect x="3" y="3" width="18" height="18" rx="2" />
+                <circle cx="8.5" cy="8.5" r="1.5" />
+                <path d="M21 15l-5-5L5 21" />
+              </svg>
+            </div>
 
-            <h3 className="sr-only">{benefit.title}</h3>
-            <p className="mx-auto mt-5 max-w-64 px-3 text-xs sm:text-sm font-normal leading-relaxed text-[#0E1035]/66">
+            <h3 className="mt-5 text-base sm:text-lg font-extrabold text-[#0E1035]">{benefit.title}</h3>
+            <p className="mx-auto mt-2 max-w-64 px-3 text-xs sm:text-sm font-normal leading-relaxed text-[#0E1035]/66">
               {benefit.description}
             </p>
           </article>
