@@ -19,7 +19,6 @@ import { VoyagerTestimonials } from './components/VoyagerTestimonials';
 import { FaqSection } from './components/FaqSection';
 import { Footer } from './components/Footer';
 import { WhatsAppButton } from './components/WhatsAppButton';
-import { BookingModal } from './components/BookingModal';
 import { ItineraryModal } from './components/ItineraryModal';
 import { ArticleReaderModal } from './components/ArticleReaderModal';
 import { CRUISE_DEALS } from './data/cruiseData';
@@ -57,10 +56,6 @@ export default function App() {
   const [activeLuxurySubpage, setActiveLuxurySubpage] = useState<string>('all');
   const [activeDestinationSubpage, setActiveDestinationSubpage] = useState<string>('all');
   const [activeDealSubpage, setActiveDealSubpage] = useState<string>('all');
-
-  const [bookingModalOpen, setBookingModalOpen] = useState(false);
-  const [selectedDealTitle, setSelectedDealTitle] = useState<string | undefined>(undefined);
-  const [quoteDetails, setQuoteDetails] = useState<any>(undefined);
 
   const [selectedItineraryDeal, setSelectedItineraryDeal] = useState<CruiseDeal | null>(null);
   const [selectedArticle, setSelectedArticle] = useState<TravelTip | null>(null);
@@ -114,16 +109,8 @@ export default function App() {
     handleScrollToSection('quiz-section');
   };
 
-  const handleOpenBookingModal = (dealTitle?: string) => {
-    setSelectedDealTitle(dealTitle);
-    setQuoteDetails(undefined);
-    setBookingModalOpen(true);
-  };
-
-  const handleOpenBookingModalWithDetails = (details: any) => {
-    setSelectedDealTitle(`Custom Stateroom Quote: ${details.cruiseLine} - ${details.stateroom}`);
-    setQuoteDetails(details);
-    setBookingModalOpen(true);
+  const handleOpenBookingModal = (_dealTitle?: string) => {
+    // Vacation planning consultation popup is disabled sitewide.
   };
 
   const handleOpenItineraryModal = (deal: CruiseDeal) => {
@@ -256,14 +243,6 @@ export default function App() {
 
       {/* Sticky WhatsApp Contact Button */}
       <WhatsAppButton />
-
-      {/* Interactive Booking / Free Quote Modal */}
-      <BookingModal
-        isOpen={bookingModalOpen}
-        onClose={() => setBookingModalOpen(false)}
-        initialDealTitle={selectedDealTitle}
-        initialQuoteDetails={quoteDetails}
-      />
 
       {/* Interactive Itinerary & Port Timeline Modal */}
       <ItineraryModal

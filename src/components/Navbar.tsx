@@ -206,7 +206,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onSelectSection, onNavigateToCon
           </div>
 
           {/* Desktop Navigation Links with Dream Vacations Hierarchy */}
-          <div className="hidden xl:flex items-center gap-5 2xl:gap-7 text-xs font-semibold uppercase tracking-normal text-[#0E1035]">
+          <div className="hidden xl:flex items-center gap-5 2xl:gap-7 text-sm font-semibold uppercase tracking-normal text-[#0E1035]">
             {navMenuItems.map((item) => {
               const isOpen = activeDropdown === item.id;
               return (
@@ -273,7 +273,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onSelectSection, onNavigateToCon
           <div className="hidden sm:flex items-center gap-3">
             <button
               onClick={onNavigateToContact}
-              className="text-[#0E1035] px-3.5 py-2 text-xs font-black hover:text-[#14ABFA] transition-colors uppercase tracking-normal cursor-pointer focus:outline-none border-b-2 border-transparent hover:border-[#14ABFA]"
+              className="text-sm font-bold uppercase tracking-wide text-white bg-[#0E1035] hover:bg-[#14ABFA] hover:text-[#0E1035] transition-colors cursor-pointer px-5 py-2.5 focus:outline-none"
             >
               <span>Contact Us</span>
             </button>

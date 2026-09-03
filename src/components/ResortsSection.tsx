@@ -318,8 +318,9 @@ export const ResortsSection: React.FC<ResortsSectionProps> = ({
               </p>
               <button
                 type="button"
-                onClick={() => onOpenBookingModal(`Explore ${activeStory.title}`)}
-                className="card-action-link resort-action-link mt-8 cursor-pointer"
+                disabled
+                aria-disabled="true"
+                className="card-action-link resort-action-link mt-8 opacity-50 cursor-not-allowed pointer-events-none"
                 style={{ '--resort-action-color': activeGroup.foreground } as React.CSSProperties}
               >
                 Explore {activeStory.title}

@@ -421,8 +421,9 @@ export const LuxurySection: React.FC<LuxurySectionProps> = ({
               </p>
               <button
                 type="button"
-                onClick={() => onOpenBookingModal(`Explore ${activeStory.title}`)}
-                className="card-action-link mt-8 cursor-pointer"
+                disabled
+                aria-disabled="true"
+                className="card-action-link mt-8 opacity-50 cursor-not-allowed pointer-events-none"
                 style={{ color: activeGroup.foreground }}
               >
                 Explore {activeStory.title}

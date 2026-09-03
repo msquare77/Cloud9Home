@@ -78,8 +78,9 @@ const DestinationTile: React.FC<DestinationTileProps> = ({
         </p>
         <button
           type="button"
-          onClick={() => onOpenBookingModal(`Destination Planning: ${destination.name}`)}
-          className="card-action-link card-action-link--dark mt-4 cursor-pointer"
+          disabled
+          aria-disabled="true"
+          className="card-action-link card-action-link--dark mt-4 opacity-50 cursor-not-allowed pointer-events-none"
         >
           Explore {destination.name}
         </button>

@@ -295,8 +295,9 @@ export const DealsSection: React.FC<DealsSectionProps> = ({
 
             <button
               type="button"
-              onClick={() => onOpenBookingModal(`Deal inquiry: ${activeStory.title}`)}
-              className="card-action-link relative mt-8 cursor-pointer"
+              disabled
+              aria-disabled="true"
+              className="card-action-link relative mt-8 opacity-50 cursor-not-allowed pointer-events-none"
               style={{ color: activeGroup.foreground }}
             >
               Explore {activeStory.title}

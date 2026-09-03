@@ -31,13 +31,13 @@ export const Footer: React.FC<FooterProps> = ({ onSelectSection, onNavigateToCon
               <img
                 src={CLOUD9_LOGO}
                 alt="Cloud 9 Travels — Narmin and Naushad Kermally"
-                className="h-16 w-32 object-contain object-left sm:h-20 sm:w-40"
+                className="h-20 w-40 object-contain object-left sm:h-28 sm:w-56"
               />
-              <div className="w-px h-12 bg-[#0E1035]/15 shrink-0" aria-hidden="true" />
+              <div className="w-px h-16 bg-[#0E1035]/15 shrink-0" aria-hidden="true" />
               <img
                 src={DREAM_VACATIONS_LOGO}
                 alt="Dream Vacations — Start Here"
-                className="h-9 sm:h-10 w-auto object-contain shrink-0"
+                className="h-12 sm:h-14 w-auto object-contain shrink-0"
               />
             </div>
 
@@ -78,7 +78,7 @@ export const Footer: React.FC<FooterProps> = ({ onSelectSection, onNavigateToCon
               </h3>
             </div>
 
-            <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap lg:flex-col xl:flex-row">
+            <div className="flex flex-col gap-4">
               <a href="tel:17135607016" className="flex items-center gap-3 text-base sm:text-lg font-bold text-[#0E1035] hover:text-[#14ABFA] transition-colors">
                 <Phone className="w-5 h-5 text-[#14ABFA] shrink-0" />
                 (713) 560-7016
