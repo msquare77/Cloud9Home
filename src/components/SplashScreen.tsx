@@ -67,10 +67,22 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onEnter }) => {
     }, 1800);
   };
 
+  useEffect(() => {
+    const autoAdvance = window.setTimeout(() => {
+      handleEnter();
+    }, 2600);
+    return () => window.clearTimeout(autoAdvance);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   if (hidden) return null;
 
   return (
-    <div className="fixed inset-0 z-[300] overflow-hidden" aria-hidden={closing}>
+    <div
+      className="fixed inset-0 z-[300] overflow-hidden cursor-pointer"
+      aria-hidden={closing}
+      onClick={handleEnter}
+    >
       {/* Background + circle + content: this layer fades away in place, revealing the homepage underneath */}
       <div
         className={`absolute inset-0 bg-[#0E1035] ${closing ? 'pointer-events-none' : ''}`}
