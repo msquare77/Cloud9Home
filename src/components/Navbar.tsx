@@ -5,8 +5,8 @@ const CLOUD9_LOGO = new URL('../../assets/Cloud 9 Logo.png', import.meta.url).hr
 const DREAM_VACATIONS_LOGO = new URL('../../assets/dream-vacations-logo-color.svg', import.meta.url).href;
 
 interface NavbarProps {
-  onOpenBookingModal: (dealTitle?: string) => void;
   onSelectSection: (sectionId: string, subpageKey?: string) => void;
+  onNavigateToContact: () => void;
 }
 
 interface NavSubpage {
@@ -22,7 +22,7 @@ interface NavMenuItem {
   subpages: NavSubpage[];
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenBookingModal, onSelectSection }) => {
+export const Navbar: React.FC<NavbarProps> = ({ onSelectSection, onNavigateToContact }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -278,10 +278,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBookingModal, onSelectSect
           {/* Call to Action Buttons */}
           <div className="hidden sm:flex items-center gap-3">
             <button
-              onClick={() => onOpenBookingModal()}
+              onClick={onNavigateToContact}
               className="text-[#0E1035] px-3.5 py-2 text-xs font-black hover:text-[#14ABFA] transition-colors uppercase tracking-normal cursor-pointer focus:outline-none border-b-2 border-transparent hover:border-[#14ABFA]"
             >
-              <span>Request Free Quote</span>
+              <span>Contact Us</span>
             </button>
           </div>
 
@@ -348,11 +348,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBookingModal, onSelectSect
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
-                  onOpenBookingModal();
+                  onNavigateToContact();
                 }}
                 className="w-full py-3 text-center font-bold text-xs uppercase tracking-normal text-[#0E1035] border-b-2 border-[#14ABFA] transition-colors"
               >
-                Request Free Vacation Quote
+                Contact Us
               </button>
               <a
                 href="tel:17135607016"

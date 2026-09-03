@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { SplashScreen } from './components/SplashScreen';
 import { HeroSection } from './components/HeroSection';
@@ -13,7 +13,7 @@ import { ToursSection } from './components/ToursSection';
 import { LuxurySection } from './components/LuxurySection';
 import { DestinationsSection } from './components/DestinationsSection';
 import { DealsSection } from './components/DealsSection';
-import { InstantQuoteBuilder } from './components/InstantQuoteBuilder';
+import { ContactPage } from './components/ContactPage';
 import { ExtrasSection } from './components/ExtrasSection';
 import { GalleryShowcase } from './components/GalleryShowcase';
 import { FamilyTravelTips } from './components/FamilyTravelTips';
@@ -28,7 +28,18 @@ import { ArticleReaderModal } from './components/ArticleReaderModal';
 import { CRUISE_DEALS } from './data/cruiseData';
 import { CruiseFilterState, CruiseDeal, TravelTip } from './types';
 
+const getPageFromLocation = (): 'home' | 'contact' =>
+  window.location.pathname.replace(/\/$/, '') === '/contact' ? 'contact' : 'home';
+
 export default function App() {
+  const [page, setPage] = useState<'home' | 'contact'>(getPageFromLocation);
+
+  useEffect(() => {
+    const onPopState = () => setPage(getPageFromLocation());
+    window.addEventListener('popstate', onPopState);
+    return () => window.removeEventListener('popstate', onPopState);
+  }, []);
+
   const [filters, setFilters] = useState<CruiseFilterState>({
     destination: 'all',
     cruiseLine: 'all',
@@ -59,22 +70,37 @@ export default function App() {
     setFilters(prev => ({ ...prev, [key]: value }));
   };
 
+  const applySubpageSelection = (sectionId: string, subpageKey?: string) => {
+    if (!subpageKey) return;
+    if (sectionId === 'cruises-section') setActiveCruiseSubpage(subpageKey);
+    if (sectionId === 'resorts-section') setActiveResortSubpage(subpageKey);
+    if (sectionId === 'tours-section') setActiveTourSubpage(subpageKey);
+    if (sectionId === 'luxury-section') setActiveLuxurySubpage(subpageKey);
+    if (sectionId === 'destinations-section') setActiveDestinationSubpage(subpageKey);
+    if (sectionId === 'deals-section') setActiveDealSubpage(subpageKey);
+    if (sectionId === 'extras-section') setActiveExtraSubpage(subpageKey);
+    if (sectionId === 'gallery-section') setActiveGalleryCategory(subpageKey);
+  };
+
   const handleScrollToSection = (sectionId: string, subpageKey?: string) => {
-    if (subpageKey) {
-      if (sectionId === 'cruises-section') setActiveCruiseSubpage(subpageKey);
-      if (sectionId === 'resorts-section') setActiveResortSubpage(subpageKey);
-      if (sectionId === 'tours-section') setActiveTourSubpage(subpageKey);
-      if (sectionId === 'luxury-section') setActiveLuxurySubpage(subpageKey);
-      if (sectionId === 'destinations-section') setActiveDestinationSubpage(subpageKey);
-      if (sectionId === 'deals-section') setActiveDealSubpage(subpageKey);
-      if (sectionId === 'extras-section') setActiveExtraSubpage(subpageKey);
-      if (sectionId === 'gallery-section') setActiveGalleryCategory(subpageKey);
+    applySubpageSelection(sectionId, subpageKey);
+
+    if (page === 'contact') {
+      window.history.pushState({}, '', '/');
+      setPage('home');
+      window.setTimeout(() => {
+        document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+      }, 60);
+      return;
     }
 
-    const el = document.getElementById(sectionId);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const navigateToContact = () => {
+    window.history.pushState({}, '', '/contact');
+    setPage('contact');
+    window.scrollTo(0, 0);
   };
 
   const handleSearchSubmit = () => {
@@ -116,15 +142,19 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#F1F6FD] text-[#0E1035] flex flex-col selection:bg-[#14ABFA]/20 selection:text-[#0E1035]">
       {/* 0. Cloud Portal Splash Screen */}
-      <SplashScreen />
+      {page === 'home' && <SplashScreen />}
 
       {/* 1. Header & Navigation with Dream Vacations Hierarchy */}
       <Navbar
-        onOpenBookingModal={handleOpenBookingModal}
         onSelectSection={handleScrollToSection}
+        onNavigateToContact={navigateToContact}
       />
 
       <main className="flex-1">
+        {page === 'contact' ? (
+          <ContactPage />
+        ) : (
+          <>
         {/* 1. Hero Section with Live Search Engine & Concierge Spotlight */}
         <HeroSection
           filters={filters}
@@ -202,9 +232,6 @@ export default function App() {
           key={`destinations-${activeDestinationSubpage}`}
         />
 
-        {/* 14. Instant Stateroom Quote & Fare Estimator */}
-        <InstantQuoteBuilder onOpenBookingModalWithDetails={handleOpenBookingModalWithDetails} />
-
         {/* 15. TRAVEL EXTRAS & CONCIERGE SERVICES */}
         <ExtrasSection
           onOpenBookingModal={handleOpenBookingModal}
@@ -230,6 +257,8 @@ export default function App() {
 
         {/* 21. Bespoke Voyage CTA & Newsletter */}
         <ConversionCtaBanner onOpenBookingModal={() => handleOpenBookingModal()} />
+          </>
+        )}
       </main>
 
       {/* 22. Comprehensive Footer with Legal & Contact */}
