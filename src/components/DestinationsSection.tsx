@@ -1,4 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { X, Play } from 'lucide-react';
+
+const SPLASH_OCEAN = new URL('../../assets/splash/splash-ocean.webp', import.meta.url).href;
 
 interface DestinationsSectionProps {
   onSelectDestination: (destinationRegion: string) => void;
@@ -37,13 +40,14 @@ interface DestinationTileProps {
   index: number;
   featured?: boolean;
   onOpenBookingModal: (dealTitle?: string) => void;
+  onOpenVideo: (destination: DestinationListing) => void;
 }
 
 const DestinationTile: React.FC<DestinationTileProps> = ({
   destination,
   index,
   featured = false,
-  onOpenBookingModal
+  onOpenVideo
 }) => (
   <article
     className={`group relative h-full overflow-hidden rounded-[18px] bg-[#0E1035] ${
@@ -78,9 +82,8 @@ const DestinationTile: React.FC<DestinationTileProps> = ({
         </p>
         <button
           type="button"
-          disabled
-          aria-disabled="true"
-          className="card-action-link card-action-link--dark mt-4 opacity-50 cursor-not-allowed pointer-events-none"
+          onClick={() => onOpenVideo(destination)}
+          className="card-action-link card-action-link--dark mt-4 cursor-pointer"
         >
           Explore {destination.name}
         </button>
@@ -96,6 +99,7 @@ export const DestinationsSection: React.FC<DestinationsSectionProps> = ({
   const initialDestination = DESTINATIONS.find((destination) => destination.id === initialSubpage);
   const [searchTerm, setSearchTerm] = useState(initialDestination?.name || '');
   const [searchOpen, setSearchOpen] = useState(false);
+  const [videoDestination, setVideoDestination] = useState<DestinationListing | null>(null);
   const searchRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -192,6 +196,7 @@ export const DestinationsSection: React.FC<DestinationsSectionProps> = ({
                     destination={destination}
                     index={DESTINATIONS.indexOf(destination)}
                     onOpenBookingModal={onOpenBookingModal}
+                    onOpenVideo={setVideoDestination}
                   />
                 ))}
               </div>
@@ -214,17 +219,62 @@ export const DestinationsSection: React.FC<DestinationsSectionProps> = ({
                 index={0}
                 featured
                 onOpenBookingModal={onOpenBookingModal}
+                onOpenVideo={setVideoDestination}
               />
               <DestinationTile
                 destination={DESTINATIONS[1]}
                 index={1}
                 featured
                 onOpenBookingModal={onOpenBookingModal}
+                onOpenVideo={setVideoDestination}
               />
             </div>
           )}
         </div>
       </div>
+
+      {videoDestination && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-xs p-4"
+          onClick={() => setVideoDestination(null)}
+        >
+          <div
+            className="relative w-full max-w-3xl overflow-hidden bg-[#0E1035] shadow-2xl"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <button
+              onClick={() => setVideoDestination(null)}
+              className="absolute top-4 right-4 z-10 p-2.5 text-white/80 hover:text-white transition-colors cursor-pointer"
+              aria-label="Close video"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <div className="relative aspect-video w-full">
+              <img
+                src={SPLASH_OCEAN}
+                alt=""
+                aria-hidden="true"
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+              <div className="absolute inset-0 bg-[#0E1035]/55" />
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 px-6 text-center">
+                <span className="flex h-16 w-16 items-center justify-center rounded-full border-2 border-white bg-white/15 text-white shadow-lg backdrop-blur-sm">
+                  <Play className="h-6 w-6 translate-x-0.5" fill="currentColor" />
+                </span>
+                <div>
+                  <h3 className="text-xl font-extrabold text-white sm:text-2xl">
+                    {videoDestination.name} Video
+                  </h3>
+                  <p className="mt-1 text-sm text-white/70">
+                    Coming soon — a first look at your {videoDestination.name} journey.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
