@@ -316,7 +316,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
           <div className="col-span-2 lg:col-span-1 flex justify-start lg:justify-end items-center gap-3 pt-2 lg:pt-0">
             <div className="text-left lg:text-right">
-              <span className="font-signature block text-lg sm:text-xl text-[#14ABFA] select-none">Narmin & Naushad Kermally</span>
+              <span className="font-signature block text-lg sm:text-xl text-black select-none">Narmin & Naushad Kermally</span>
               <a href="tel:17135607016" className="text-xs font-semibold text-[#0E1035] hover:text-[#14ABFA] underline">
                 (713) 560-7016
               </a>
