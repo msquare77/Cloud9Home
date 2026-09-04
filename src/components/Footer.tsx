@@ -1,5 +1,6 @@
 import React from 'react';
 import { Phone, Mail, MapPin } from 'lucide-react';
+import { SHOW_RESORTS_TOURS_LUXURY } from '../config/featureFlags';
 
 const CLOUD9_LOGO = new URL('../../assets/Cloud 9 Logo.png', import.meta.url).href;
 const DREAM_VACATIONS_LOGO = new URL('../../assets/dream-vacations-logo-color.svg', import.meta.url).href;
@@ -8,18 +9,21 @@ interface FooterProps {
   onSelectSection: (sectionId: string) => void;
   onNavigateToContact: () => void;
   onNavigateToFaq: () => void;
+  onNavigateToTravelJournal: () => void;
 }
 
 const FOOTER_NAV_LINKS = [
-  { label: 'Cruises', sectionId: 'cruises-section' },
-  { label: 'Resorts', sectionId: 'resorts-section' },
-  { label: 'Tours', sectionId: 'tours-section' },
-  { label: 'Luxury', sectionId: 'luxury-section' },
-  { label: 'Destinations', sectionId: 'destinations-section' },
-  { label: 'Deals', sectionId: 'deals-section' }
+  { label: 'Cruises', sectionId: 'cruises-section', hidden: false },
+  { label: 'Resorts', sectionId: 'resorts-section', hidden: !SHOW_RESORTS_TOURS_LUXURY },
+  { label: 'Tours', sectionId: 'tours-section', hidden: !SHOW_RESORTS_TOURS_LUXURY },
+  { label: 'Luxury', sectionId: 'luxury-section', hidden: !SHOW_RESORTS_TOURS_LUXURY },
+  { label: 'Destinations', sectionId: 'destinations-section', hidden: false },
+  { label: 'Deals', sectionId: 'deals-section', hidden: false },
+  { label: 'Extras', sectionId: 'extras-section', hidden: false },
+  { label: 'Pay Now', sectionId: 'pay-now-section', hidden: false }
 ];
 
-export const Footer: React.FC<FooterProps> = ({ onSelectSection, onNavigateToContact, onNavigateToFaq }) => {
+export const Footer: React.FC<FooterProps> = ({ onSelectSection, onNavigateToContact, onNavigateToFaq, onNavigateToTravelJournal }) => {
   return (
     <footer id="main-footer" className="w-full bg-[#0E1035] text-[#0E1035] overflow-hidden">
       <div className="w-full bg-white px-4 sm:px-6 lg:px-8 xl:px-10 py-12 sm:py-16">
@@ -42,7 +46,7 @@ export const Footer: React.FC<FooterProps> = ({ onSelectSection, onNavigateToCon
             </div>
 
             <nav aria-label="Footer navigation" className="flex flex-wrap items-center gap-x-7 gap-y-3">
-              {FOOTER_NAV_LINKS.map((link) => (
+              {FOOTER_NAV_LINKS.filter((link) => !link.hidden).map((link) => (
                 <button
                   key={link.sectionId}
                   onClick={() => onSelectSection(link.sectionId)}
@@ -56,6 +60,12 @@ export const Footer: React.FC<FooterProps> = ({ onSelectSection, onNavigateToCon
                 className="text-sm font-bold uppercase tracking-wide text-[#0E1035] hover:text-[#14ABFA] transition-colors cursor-pointer"
               >
                 FAQs
+              </button>
+              <button
+                onClick={onNavigateToTravelJournal}
+                className="text-sm font-bold uppercase tracking-wide text-[#0E1035] hover:text-[#14ABFA] transition-colors cursor-pointer"
+              >
+                Travel Journal
               </button>
               <button
                 onClick={onNavigateToContact}

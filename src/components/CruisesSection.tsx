@@ -3,6 +3,9 @@ import { CruiseDeal } from '../types';
 import { AllCruiseLinesDirectory, CruiseDirectoryFilter } from './AllCruiseLinesDirectory';
 import { ALL_CRUISE_LINES } from '../data/allCruiseLinesData';
 
+const CRUISES_HERO_VIDEO = new URL('../../assets/videos/cruises-hero-background.mp4', import.meta.url).href;
+const CRUISES_HERO_POSTER = new URL('../../assets/videos/cruises-hero-poster.jpg', import.meta.url).href;
+
 interface CruisesSectionProps {
   deals: CruiseDeal[];
   onOpenBookingModal: (dealTitle?: string) => void;
@@ -149,8 +152,23 @@ export const CruisesSection: React.FC<CruisesSectionProps> = ({ initialSubpage }
   };
 
   return (
-    <section id="cruises-section" className="py-20 sm:py-28 bg-[#F1F6FD]">
-      <div className="w-full max-w-[1640px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
+    <section id="cruises-section" className="relative overflow-hidden py-20 sm:py-28">
+      {/* Background video */}
+      <video
+        className="absolute inset-0 h-full w-full object-cover"
+        src={CRUISES_HERO_VIDEO}
+        poster={CRUISES_HERO_POSTER}
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="metadata"
+        aria-hidden="true"
+      />
+      {/* White low-opacity overlay to protect text readability over the video */}
+      <div className="absolute inset-0 bg-white/70" aria-hidden="true" />
+
+      <div className="relative z-10 w-full max-w-[1640px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
         <div className="flex flex-col gap-7 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-4xl">
             <span className="font-signature text-3xl sm:text-4xl text-[#14ABFA] select-none block mb-1">

@@ -1,4 +1,5 @@
 import React from 'react';
+import { ShieldCheck, UserCheck, Tag, Award } from 'lucide-react';
 import { CruiseFilterState } from '../types';
 
 const HERO_CRUISE_IMAGE = new URL('../../assets/magnific/hero-cruise.png', import.meta.url).href;
@@ -294,33 +295,33 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
         {/* Editorial Bottom Value Grid Strip */}
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-x-5 gap-y-8 border-t border-[#0E1035]/10 pt-10">
-          <div className="flex flex-col gap-1">
-            <span className="text-sm font-bold text-[#0E1035]">Price Guarantee</span>
-            <span className="text-xs text-[#0E1035]/60 font-normal">See current terms and conditions</span>
-          </div>
-
-          <div className="flex flex-col gap-1">
-            <span className="text-sm font-bold text-[#0E1035]">Full-Service Advisor</span>
-            <span className="text-xs text-[#0E1035]/60 font-normal">Dedicated vacation planning support</span>
-          </div>
-
-          <div className="flex flex-col gap-1">
-            <span className="text-sm font-bold text-[#0E1035]">Exclusive Deals</span>
-            <span className="text-xs text-[#0E1035]/60 font-normal">Sign up for current vacation offers</span>
-          </div>
-
-          <div className="flex flex-col gap-1">
-            <span className="text-sm font-bold text-[#0E1035]">Dream Vacations Franchise</span>
-            <span className="text-xs text-[#0E1035]/60 font-normal">Trusted advisors since 2011</span>
-          </div>
-
-          <div className="col-span-2 lg:col-span-1 flex justify-start lg:justify-end items-center gap-3 pt-2 lg:pt-0">
-            <div className="text-left lg:text-right">
+          <div className="col-span-2 lg:col-span-1 flex items-center gap-3">
+            <div className="text-left">
               <span className="font-signature block text-xl sm:text-2xl text-black select-none whitespace-nowrap">Narmin & Naushad Kermally</span>
               <a href="tel:17135607016" className="text-xs font-semibold text-[#0E1035] hover:text-[#14ABFA] underline">
                 (713) 560-7016
               </a>
             </div>
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <ShieldCheck className="w-5 h-5 text-[#14ABFA]" strokeWidth={2} />
+            <span className="text-sm font-bold text-[#0E1035]">Price Guarantee</span>
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <UserCheck className="w-5 h-5 text-[#14ABFA]" strokeWidth={2} />
+            <span className="text-sm font-bold text-[#0E1035]">Full-Service Advisor</span>
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <Tag className="w-5 h-5 text-[#14ABFA]" strokeWidth={2} />
+            <span className="text-sm font-bold text-[#0E1035]">Exclusive Deals</span>
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <Award className="w-5 h-5 text-[#14ABFA]" strokeWidth={2} />
+            <span className="text-sm font-bold text-[#0E1035]">Dream Vacations Franchise</span>
           </div>
         </div>
 

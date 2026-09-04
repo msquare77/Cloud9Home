@@ -21,21 +21,37 @@ import { Footer } from './components/Footer';
 import { WhatsAppButton } from './components/WhatsAppButton';
 import { ItineraryModal } from './components/ItineraryModal';
 import { ArticleReaderModal } from './components/ArticleReaderModal';
+import { ExtrasSection } from './components/ExtrasSection';
+import { PayNowSection } from './components/PayNowSection';
+import { TravelJournalSection } from './components/TravelJournalSection';
+import { TravelJournalArticlePage } from './components/TravelJournalArticlePage';
 import { CRUISE_DEALS } from './data/cruiseData';
 import { CruiseFilterState, CruiseDeal, TravelTip } from './types';
+import { SHOW_RESORTS_TOURS_LUXURY } from './config/featureFlags';
 
-const getPageFromLocation = (): 'home' | 'contact' | 'faq' => {
+const getPageFromLocation = (): 'home' | 'contact' | 'faq' | 'travel-journal' => {
   const path = window.location.pathname.replace(/\/$/, '');
   if (path === '/contact') return 'contact';
   if (path === '/faq') return 'faq';
+  if (path === '/travel-journal' || path.startsWith('/travel-journal/')) return 'travel-journal';
   return 'home';
 };
 
+const getSlugFromLocation = (): string | null => {
+  const path = window.location.pathname.replace(/\/$/, '');
+  const match = path.match(/^\/travel-journal\/(.+)$/);
+  return match ? decodeURIComponent(match[1]) : null;
+};
+
 export default function App() {
-  const [page, setPage] = useState<'home' | 'contact' | 'faq'>(getPageFromLocation);
+  const [page, setPage] = useState<'home' | 'contact' | 'faq' | 'travel-journal'>(getPageFromLocation);
+  const [travelJournalSlug, setTravelJournalSlug] = useState<string | null>(getSlugFromLocation);
 
   useEffect(() => {
-    const onPopState = () => setPage(getPageFromLocation());
+    const onPopState = () => {
+      setPage(getPageFromLocation());
+      setTravelJournalSlug(getSlugFromLocation());
+    };
     window.addEventListener('popstate', onPopState);
     return () => window.removeEventListener('popstate', onPopState);
   }, []);
@@ -101,6 +117,14 @@ export default function App() {
     window.scrollTo(0, 0);
   };
 
+  const navigateToTravelJournal = (slug?: string) => {
+    const path = slug ? `/travel-journal/${slug}` : '/travel-journal';
+    window.history.pushState({}, '', path);
+    setPage('travel-journal');
+    setTravelJournalSlug(slug || null);
+    window.scrollTo(0, 0);
+  };
+
   const handleSearchSubmit = () => {
     handleScrollToSection('cruises-section', 'all');
   };
@@ -139,6 +163,7 @@ export default function App() {
         onSelectSection={handleScrollToSection}
         onNavigateToContact={navigateToContact}
         onNavigateToFaq={navigateToFaq}
+        onNavigateToTravelJournal={navigateToTravelJournal}
       />
 
       <main className="flex-1">
@@ -146,6 +171,17 @@ export default function App() {
           <ContactPage />
         ) : page === 'faq' ? (
           <FaqSection onOpenBookingModal={() => handleOpenBookingModal()} />
+        ) : page === 'travel-journal' ? (
+          travelJournalSlug ? (
+            <TravelJournalArticlePage
+              slug={travelJournalSlug}
+              onBack={() => navigateToTravelJournal()}
+              onOpenArticle={(articleSlug) => navigateToTravelJournal(articleSlug)}
+              onOpenBookingModal={handleOpenBookingModal}
+            />
+          ) : (
+            <TravelJournalSection onOpenArticle={(articleSlug) => navigateToTravelJournal(articleSlug)} />
+          )
         ) : (
           <>
         {/* 1. Hero Section with Live Search Engine & Concierge Spotlight */}
@@ -196,26 +232,32 @@ export default function App() {
         {/* 8. Free Perks & Amenity Value Calculator */}
         <PerksCalculator onOpenBookingModal={() => handleOpenBookingModal()} />
 
-        {/* 9. ALL-INCLUSIVE RESORTS & GETAWAYS */}
-        <ResortsSection
-          onOpenBookingModal={handleOpenBookingModal}
-          initialSubpage={activeResortSubpage}
-          key={`resorts-${activeResortSubpage}`}
-        />
+        {/* 9-11. RESORTS, TOURS & LUXURY — hidden per request, not removed.
+             Flip SHOW_RESORTS_TOURS_LUXURY to true to bring these back. */}
+        {SHOW_RESORTS_TOURS_LUXURY && (
+          <>
+            {/* 9. ALL-INCLUSIVE RESORTS & GETAWAYS */}
+            <ResortsSection
+              onOpenBookingModal={handleOpenBookingModal}
+              initialSubpage={activeResortSubpage}
+              key={`resorts-${activeResortSubpage}`}
+            />
 
-        {/* 10. GUIDED WORLD TOURS & SAFARIS */}
-        <ToursSection
-          onOpenBookingModal={handleOpenBookingModal}
-          initialSubpage={activeTourSubpage}
-          key={`tours-${activeTourSubpage}`}
-        />
+            {/* 10. GUIDED WORLD TOURS & SAFARIS */}
+            <ToursSection
+              onOpenBookingModal={handleOpenBookingModal}
+              initialSubpage={activeTourSubpage}
+              key={`tours-${activeTourSubpage}`}
+            />
 
-        {/* 11. ULTRA-LUXURY VACATIONS & YACHT CHARTERS */}
-        <LuxurySection
-          onOpenBookingModal={handleOpenBookingModal}
-          initialSubpage={activeLuxurySubpage}
-          key={`luxury-${activeLuxurySubpage}`}
-        />
+            {/* 11. ULTRA-LUXURY VACATIONS & YACHT CHARTERS */}
+            <LuxurySection
+              onOpenBookingModal={handleOpenBookingModal}
+              initialSubpage={activeLuxurySubpage}
+              key={`luxury-${activeLuxurySubpage}`}
+            />
+          </>
+        )}
 
         {/* 12. TOP WORLD DESTINATIONS */}
         <DestinationsSection
@@ -225,11 +267,17 @@ export default function App() {
           key={`destinations-${activeDestinationSubpage}`}
         />
 
+        {/* 12.5 TRAVEL EXTRAS: WiFi, Beverage & Excursion Add-Ons */}
+        <ExtrasSection onOpenBookingModal={handleOpenBookingModal} />
+
         {/* 17. Family Guides & Stateroom Insider Tips */}
         <FamilyTravelTips onOpenArticle={handleOpenArticle} />
 
         {/* 18. Verified Voyager Testimonials */}
         <VoyagerTestimonials />
+
+        {/* 19. PAY NOW: Existing Booking Balance Payment */}
+        <PayNowSection onOpenBookingModal={handleOpenBookingModal} />
           </>
         )}
       </main>
@@ -239,6 +287,7 @@ export default function App() {
         onSelectSection={handleScrollToSection}
         onNavigateToContact={navigateToContact}
         onNavigateToFaq={navigateToFaq}
+        onNavigateToTravelJournal={navigateToTravelJournal}
       />
 
       {/* Sticky WhatsApp Contact Button */}

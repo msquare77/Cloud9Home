@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { CruiseFilterState } from '../types';
+import { SHOW_RESORTS_TOURS_LUXURY } from '../config/featureFlags';
 
 const EXPLORER_BACKGROUND = new URL('../../assets/magnific/vacation-explorer.png', import.meta.url).href;
 const RESORT_IMAGES = [
@@ -156,7 +157,9 @@ export const VacationExplorerSection: React.FC<VacationExplorerSectionProps> = (
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0E1035] tracking-tight mb-7">Explore All Vacation Experiences</h2>
 
           <div className="flex flex-wrap items-center gap-2 sm:gap-5 mb-7 text-xs font-black text-[#0E1035]">
-            {(['cruises', 'resorts', 'tours', 'luxury'] as Tab[]).map(tab => (
+            {(['cruises', 'resorts', 'tours', 'luxury'] as Tab[])
+              .filter((tab) => tab === 'cruises' || SHOW_RESORTS_TOURS_LUXURY)
+              .map(tab => (
               <button key={tab} type="button" onClick={() => { setActiveTab(tab); setOpenFilter(null); }} className={`px-4 py-2.5 capitalize cursor-pointer transition-colors ${activeTab === tab ? 'bg-white text-[#0E1035] shadow-[0_2px_7px_rgba(14,16,53,0.09)]' : 'text-[#0E1035]/70 hover:text-[#14ABFA]'}`}>{tab}</button>
             ))}
           </div>

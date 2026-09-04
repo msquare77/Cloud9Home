@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
+import { SHOW_RESORTS_TOURS_LUXURY } from '../config/featureFlags';
 
 const CLOUD9_LOGO = new URL('../../assets/Cloud 9 Logo.png', import.meta.url).href;
 const DREAM_VACATIONS_LOGO = new URL('../../assets/dream-vacations-logo-color.svg', import.meta.url).href;
@@ -8,6 +9,7 @@ interface NavbarProps {
   onSelectSection: (sectionId: string, subpageKey?: string) => void;
   onNavigateToContact: () => void;
   onNavigateToFaq: () => void;
+  onNavigateToTravelJournal: () => void;
 }
 
 interface NavSubpage {
@@ -21,9 +23,10 @@ interface NavMenuItem {
   label: string;
   sectionId: string;
   subpages: NavSubpage[];
+  hidden?: boolean;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onSelectSection, onNavigateToContact, onNavigateToFaq }) => {
+export const Navbar: React.FC<NavbarProps> = ({ onSelectSection, onNavigateToContact, onNavigateToFaq, onNavigateToTravelJournal }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -82,6 +85,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onSelectSection, onNavigateToCon
       id: 'resorts',
       label: 'Resorts',
       sectionId: 'resorts-section',
+      hidden: !SHOW_RESORTS_TOURS_LUXURY,
       subpages: [
         { label: 'Search Resorts', key: 'search-resorts', group: 'Search Resorts' },
         { label: 'All Resorts', key: 'featured-all', group: 'Featured Resorts' },
@@ -99,6 +103,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onSelectSection, onNavigateToCon
       id: 'tours',
       label: 'Tours',
       sectionId: 'tours-section',
+      hidden: !SHOW_RESORTS_TOURS_LUXURY,
       subpages: [
         { label: 'All Tours', key: 'all', group: 'Tours' },
         { label: 'Guided Tours', key: 'guided', group: 'Tours' },
@@ -112,6 +117,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onSelectSection, onNavigateToCon
       id: 'luxury',
       label: 'Luxury',
       sectionId: 'luxury-section',
+      hidden: !SHOW_RESORTS_TOURS_LUXURY,
       subpages: [
         { label: 'All Luxury Cruises', key: 'all-luxury-cruises', group: 'Cruises' },
         { label: 'River Cruise Lines', key: 'river-cruise-lines', group: 'Cruises' },
@@ -207,7 +213,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onSelectSection, onNavigateToCon
 
           {/* Desktop Navigation Links with Dream Vacations Hierarchy */}
           <div className="hidden xl:flex items-center gap-5 2xl:gap-7 text-sm font-semibold uppercase tracking-normal text-[#0E1035]">
-            {navMenuItems.map((item) => {
+            {navMenuItems.filter((item) => !item.hidden).map((item) => {
               const isOpen = activeDropdown === item.id;
               return (
                 <div
@@ -261,10 +267,31 @@ export const Navbar: React.FC<NavbarProps> = ({ onSelectSection, onNavigateToCon
             })}
 
             <button
+              onClick={() => handleNavClick('extras-section')}
+              className="hover:text-[#14ABFA] transition-colors py-2 focus:outline-none cursor-pointer border-b-2 border-transparent hover:border-[#14ABFA]"
+            >
+              <span>Extras</span>
+            </button>
+
+            <button
+              onClick={() => handleNavClick('pay-now-section')}
+              className="hover:text-[#14ABFA] transition-colors py-2 focus:outline-none cursor-pointer border-b-2 border-transparent hover:border-[#14ABFA]"
+            >
+              <span>Pay Now</span>
+            </button>
+
+            <button
               onClick={onNavigateToFaq}
               className="hover:text-[#14ABFA] transition-colors py-2 focus:outline-none cursor-pointer border-b-2 border-transparent hover:border-[#14ABFA]"
             >
               <span>FAQs</span>
+            </button>
+
+            <button
+              onClick={onNavigateToTravelJournal}
+              className="hover:text-[#14ABFA] transition-colors py-2 focus:outline-none cursor-pointer border-b-2 border-transparent hover:border-[#14ABFA]"
+            >
+              <span>Travel Journal</span>
             </button>
 
           </div>
@@ -295,7 +322,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onSelectSection, onNavigateToCon
         {mobileMenuOpen && (
           <div className="xl:hidden bg-white px-4 pt-3 pb-6 space-y-3 shadow-xl border-t border-[#0E1035]/10 max-h-[85vh] overflow-y-auto">
             <div className="space-y-1">
-              {navMenuItems.map((item) => {
+              {navMenuItems.filter((item) => !item.hidden).map((item) => {
                 const isExpanded = mobileExpandedGroup === item.id;
                 return (
                   <div key={item.id} className="border-b border-[#0E1035]/10 pb-1">
@@ -339,6 +366,24 @@ export const Navbar: React.FC<NavbarProps> = ({ onSelectSection, onNavigateToCon
 
               <div className="border-b border-[#0E1035]/10 pb-1">
                 <button
+                  onClick={() => handleNavClick('extras-section')}
+                  className="w-full py-2 text-left font-black text-xs uppercase tracking-wider text-[#0E1035]"
+                >
+                  <span>Extras</span>
+                </button>
+              </div>
+
+              <div className="border-b border-[#0E1035]/10 pb-1">
+                <button
+                  onClick={() => handleNavClick('pay-now-section')}
+                  className="w-full py-2 text-left font-black text-xs uppercase tracking-wider text-[#0E1035]"
+                >
+                  <span>Pay Now</span>
+                </button>
+              </div>
+
+              <div className="border-b border-[#0E1035]/10 pb-1">
+                <button
                   onClick={() => {
                     setMobileMenuOpen(false);
                     onNavigateToFaq();
@@ -346,6 +391,18 @@ export const Navbar: React.FC<NavbarProps> = ({ onSelectSection, onNavigateToCon
                   className="w-full py-2 text-left font-black text-xs uppercase tracking-wider text-[#0E1035]"
                 >
                   <span>FAQs</span>
+                </button>
+              </div>
+
+              <div className="border-b border-[#0E1035]/10 pb-1">
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    onNavigateToTravelJournal();
+                  }}
+                  className="w-full py-2 text-left font-black text-xs uppercase tracking-wider text-[#0E1035]"
+                >
+                  <span>Travel Journal</span>
                 </button>
               </div>
             </div>
